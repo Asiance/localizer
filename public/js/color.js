@@ -10,7 +10,6 @@ $(function () {
         // used above
         current = num + 1;
 
-        console.log($pickerz[num][0], num);
         $pickerz[num][0].color.showPicker();
     });
 

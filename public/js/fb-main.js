@@ -146,7 +146,7 @@ $(function () {
         }, { perms:'publish_stream,user_photos' });
     });
 
-    $workspace.bind('click', function (event) {
+    $fbconnect.bind('click', function (event) {
         if(Asiance.fbsession = FB.getSession()) {
             Asiance.Studio.loading(true);
             Album.fetch();

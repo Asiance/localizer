@@ -189,6 +189,14 @@ ___ ___ | | ___  _ __ _ __ (_) ___| | _____ _ __ ___
   width: 28px;
 }
 
+#colorbtn1 div {
+    background-color: #ffffff;
+}
+
+#colorbtn2 div {
+    background-color: #000000;
+}
+
 .color {
   height: 0;
   position: absolute;
