@@ -9,6 +9,7 @@
 
 #studio {
     display: none;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     position: absolute;
     text-align: center;
     top: 77px;
@@ -54,7 +55,7 @@
 }
 
 #choice {
-    height: 360px;
+    height: 290px;
     overflow-y: hidden;
     padding: 10px 30px;
     position: relative;
@@ -65,13 +66,18 @@
 #choice .fb-button {
     left: 127px;
     position: absolute; 
-    top: 130px;
+    top: 75px;
 }
 
 #choice > hr {
     margin-bottom: 28px;
-    margin-top: 186px;
+    margin-top: 126px;
     position: relative;
+}
+
+#choice .instruction {
+    font-size: 18px;
+
 }
 
 #imgform {
@@ -100,7 +106,6 @@
     /* TODO display for ie7 */
     display: inline-block;
     float: left;
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     height: 170px;
     list-style: none;
     margin-right: 1px;

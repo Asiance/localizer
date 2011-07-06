@@ -21,15 +21,7 @@ Translation.auto_migrate! unless Translation.storage_exists?
 
 include Magick
 
-Fontz = {
-  'ko' => { :family => 'Malgun Gothic', :size => '35' },
-  # 'ko' => { :family => 'SD_Puzzle Bk' },
-  'cn' => { :family => 'Kai', :size => '60' },
-  'jp' => { :family => 'YAKITORI', :size => '40' },
-  'en' => { :family => 'Malgun Gothic', :size => '40' },
-  'fr' => { :family => 'Malgun Gothic', :size => '40' },
-}
-
+# image size
 Size = 301
 
 class Localizer < Sinatra::Application
@@ -61,7 +53,7 @@ class Localizer < Sinatra::Application
       return status 400
     end
 
-    if params[:lang].empty? or params[:lang] == 'jp' then params['lang'] = 'ko' end
+    if params[:lang].empty? then params['lang'] = 'ko' end
     if params[:caption].empty? then params[:caption] = '2' end
     if params[:c1].empty? then params[:c1] = '#ffffff' end
     if params[:c2].empty? then params[:c2] = '#000000' end
@@ -70,7 +62,10 @@ class Localizer < Sinatra::Application
       caption = Translation.first(
         :message => { :id => params[:caption] },
         :lang => params[:lang]
-      ).body 
+      )
+
+      # TODO remove?
+      caption.body
     rescue
       return status 400
     end
@@ -205,35 +200,24 @@ class Localizer < Sinatra::Application
     message = Image.read(session[:message_path])[0]
 
     # polaroid effect
-    # have to change x and y to adapt to new border
-    border = 13
-    bottom = 70
-    x = params[:x].to_i + border
-    y = params[:y].to_i + border
+    degrees = -3
+    margin_x = 84
+    margin_y = 80
 
-    # white border
-    whitebg = Image.new(Size + border*2, Size + border + bottom) {
-      self.background_color = '#f0f0ff'
+    # need to adapt to polaroid layout
+    x = params[:x].to_i
+    y = params[:y].to_i
+
+    # bigger canvas to be able to put caption under the picture (pola-style)
+    canvas = Image.new(Size, Size + 70) {
+      self.background_color = 'none'
     }
 
-    image = whitebg.composite(image, border, border, OverCompositeOp)
-
-    # curling
-    amplitude = image.columns * 0.01
-    wavelength = image.rows  * 2
-
-    image.rotate!(90)
-    image = image.wave(amplitude, wavelength)
-    image.rotate!(-90)
-
-    # shadow
-    shadow = image.flop
-    shadow = shadow.colorize(1, 1, 1, "gray75")
-    shadow.background_color = "black"
-    shadow.border!(10, 10, "white")
-    shadow = shadow.blur_image(0, 3)
-
-    image = shadow.composite(image, -amplitude/2, 5, Magick::OverCompositeOp)
+    image = canvas.composite(image,
+                             NorthWestGravity,
+                             0,
+                             0,
+                             OverCompositeOp)
 
     # composing
     image.composite!(message,
@@ -241,6 +225,14 @@ class Localizer < Sinatra::Application
                      x,
                      y,
                      OverCompositeOp)
+
+    pola = Image.read(File.expand_path('..', __FILE__) + "/public/images/pola.jpg")[0]
+    image = pola.composite(image.rotate(degrees), 
+                           NorthWestGravity,
+                           margin_x,
+                           margin_y,
+                           OverCompositeOp)
+
 
     image.write(path)
 
@@ -263,8 +255,8 @@ class Localizer < Sinatra::Application
     draw = Magick::Draw.new
 
     draw.encoding('utf8')
-    draw.font_family(Fontz[lang][:family])
-    draw.pointsize(Fontz[lang][:size])
+    draw.font_family(caption.family)
+    draw.pointsize(caption.size)
     draw.font_weight(900)
     draw.text_antialias(true)
     draw.font_stretch(3)
@@ -278,7 +270,7 @@ class Localizer < Sinatra::Application
     draw.stroke(c2)
 
     draw.gravity(NorthWestGravity)
-    draw.text(x, y, caption)
+    draw.text(x, y, caption.body)
 
     draw
   end

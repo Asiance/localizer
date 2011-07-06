@@ -36,10 +36,10 @@
   cursor: pointer;
   display: block;
   height: 42px;
-  left: 157px;
+  left: 134px;
   position: absolute;
   top: 518px;
-  width: 197px;
+  width: 218px;
   z-index: 100;
 }
 
@@ -89,11 +89,13 @@
 .box .inside {
     background: url('../images/overlay.png') repeat-y;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .box .top {
     background: url('../images/overlay_top.png') no-repeat;
     height: 27px;
+    margin-bottom: -20px;
     position: relative;
 }
 
@@ -104,6 +106,16 @@
     position: relative;
 }
 
+#outline {
+    border: 2px dashed #FF5555;
+    display: block;
+    height: 301px;
+    left: 100px;
+    position: absolute;
+    top: 118px;
+    width: 301px;    
+}
+
 #photo {
     background-repeat: no-repeat;
   display: block;
@@ -111,7 +123,7 @@
   left: 102px;
   overflow: hidden;
   position: absolute;
-  top: 118px;
+  top: 120px;
   width: 301px;
 }
 
@@ -265,10 +277,10 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
   background: url('../images/shareit.png') no-repeat;
   cursor: pointer;
   height: 66px;
-  left: 142px;
+  left: 122px;
   position: absolute;
   top: 700px;
-  width: 230px;
+  width: 255px;
 }
 
 #share:hover {

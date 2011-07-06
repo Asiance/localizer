@@ -156,6 +156,7 @@ $(function () {
             .attr('src', url)
             .load(function () {
                 $photo.css('background-image', 'url(' + url + ')');
+                $('#outline').css('border', 'none');
                 $ploader.hide();
             });
         },

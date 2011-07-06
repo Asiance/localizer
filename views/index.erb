@@ -17,6 +17,7 @@
   </head>
   <body>
     <div id="localizer">
+      <div id="outline"></div>
       <div id="photo">
         <img class="caption" src="" />
         <img class="ajax-loader" src="<%= url('images/ajax-loader.gif') %>" />
@@ -66,12 +67,13 @@
         <div class="top"></div>
         <div class="inside">
         <div id="choice">
+          <p class="instruction">Upload From Facebook</p>
           <span id="fbconnect" class="fb-button">Connect with Facebook!</span>
 
           <hr />
+          <p class="instruction">Upload From Your Computer</p>
 
           <form id="imgform" action="/upload" method="post" enctype="multipart/form-data">
-            <label for="finput">Upload your own photo!</label>
             <input type="file" id="finput" name="image" />
           </form>
           <div class="clear"></div>

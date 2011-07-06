@@ -91,6 +91,7 @@ $(function () {
 
             FB.api(a.id + '/photos?' + token(), function (data) {
                 Asiance.Studio.loading(false);
+                $fbstuff.find('h2').text('Your photos');
 
                 a.photos = data.data;
 
@@ -112,6 +113,7 @@ $(function () {
                 FB.api('/me/albums?' + token(), function (data) {
                     Asiance.Studio.loading(false);
                     Asiance.albums = data.data;
+                    $('<h2>Your Albums</h2>').prependTo($fbstuff);
 
                     _(Asiance.albums).forEach(function (a) {
                         Album.render(a);
@@ -122,28 +124,49 @@ $(function () {
     }
 
     $('#share').bind('click', function (e) {
-        var path = window.location.protocol + '//' + window.location.host
+        var path = window.location.protocol + '//' + window.location.host;
 
-        FB.login(function (response) {
-            if (response.session && response.perms) {
-                Asiance.fbsession = response.session;
-
+        if (Asiance.fbsession = FB.getSession()) {
                 // adding access_token to data sent to server
-                Asiance.caption.access_token = response.session.access_token
-                Asiance.caption.uid = response.session.uid
+                Asiance.caption.access_token = Asiance.fbsession.access_token
+                Asiance.caption.uid = Asiance.fbsession.uid
 
                 // serializing
                 var data = $.param(Asiance.caption);
+
+                // sharing to wall
+                FB.ui({
+                    method: 'feed',
+                    name: 'Asiance Localizer',
+                    link: 'http://www.facebook.com/Asiance',
+                    picture: 'http://localhost/~belette/asiance/absolut/web/bottle_logo.jpg',
+                    caption: 'Generate pictures and share them with your friends!',
+                    description: '',
+                    message: ''
+                }, function(response) {
+                    if (response && response.post_id) {
+                        // published
+                    } else {
+                        // not published
+                    }
+                });
                 
                 // contacting server
+                // putting into album
                 $.post(path + '/share?' + data, function (data) {
-
+                    // do stuff after saving to album
                 });
-            } else {
+        } else {
+            FB.login(function (response) {
                 //user didn't login or didnt authorize
                 // console.log('not logged in');
-            }
-        }, { perms:'publish_stream,user_photos' });
+                if (response.perms && response.session) {
+                    Asiance.fbsession = response.session;
+                } else {
+                    // not logged in
+                }
+            }, { perms:'publish_stream,user_photos' });
+        }
     });
 
     $fbconnect.bind('click', function (event) {
