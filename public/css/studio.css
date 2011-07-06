@@ -1,0 +1,127 @@
+/*
+     _             _ _       
+ ___| |_ _   _  __| (_) ___  
+/ __| __| | | |/ _` | |/ _ \ 
+\__ \ |_| |_| | (_| | | (_) |
+|___/\__|\__,_|\__,_|_|\___/ 
+                             
+ */
+
+#studio {
+    display: none;
+    position: absolute;
+    text-align: center;
+    top: 77px;
+    z-index: 100;
+}
+
+#studio .cropbutton {
+    background: url("../images/cropme.png") no-repeat scroll 0 0 transparent;
+    display:none;
+    height: 36px;
+    margin: 15px auto;
+    position: relative;
+    width: 167px;  
+}
+
+#studio .cropbutton:hover {
+  background-position: 0 -36px;
+}
+
+#studio .inside {
+    min-height: 310px;
+}
+
+#studio .cropme {
+  display: none;
+}
+
+#studio .ajax-loader {
+  display: none;
+  left: 220px;
+  position: absolute;
+  top: 162px;
+}
+
+#studio .jcrop-holder {
+  background-color: black;
+}
+
+#workspace {
+  display: none;
+  position: relative;
+  width: 100%;
+}
+
+#choice {
+    height: 360px;
+    overflow-y: hidden;
+    padding: 10px 30px;
+    position: relative;
+    text-align: center;
+    z-index: 1000;
+}
+
+#choice .fb-button {
+    left: 127px;
+    position: absolute; 
+    top: 130px;
+}
+
+#choice > hr {
+    margin-bottom: 28px;
+    margin-top: 186px;
+    position: relative;
+}
+
+#imgform {
+  display: block;
+  position: relative;
+}
+
+#imgform label {
+  display: block;
+}
+
+#imgform input {
+}
+
+#fbstuff {
+    display: none;
+    margin: 0;
+    padding-left: 4%;
+    text-align: center;
+    width: 96%;
+}
+
+#fbstuff li {
+    color: #333;
+    cursor: pointer;
+    /* TODO display for ie7 */
+    display: inline-block;
+    float: left;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    height: 170px;
+    list-style: none;
+    margin-right: 1px;
+    padding: 5px;
+    vertical-align: middle;
+    width: 130px;
+}
+
+#fbstuff li.fbphoto {
+    height: 140px;
+}
+
+#fbstuff img {
+    border: 1px solid #BBB;
+}
+
+#fbstuff li:hover img {
+    border-color: #666;
+}
+
+#studio .jcrop-holder {
+    border: 2px solid #777;
+    margin: 0 auto;
+}

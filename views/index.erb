@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <% if ENV['RAILS_ENV'] == 'prod' %>
+    <link type="text/css" rel="stylesheet" href="<%= url('/localizer.min.css') %>" />
+
+    <% else %>
+    <link type="text/css" rel="stylesheet" href="<%= url('/css/jquery.Jcrop.css') %>" />
+    <link type="text/css" rel="stylesheet" href="<%= url('/css/global.css') %>" />
+    <link type="text/css" rel="stylesheet" href="<%= url('/css/main.css') %>" />
+    <link type="text/css" rel="stylesheet" href="<%= url('/css/studio.css') %>" />
+  <% end %>
+    
+    <meta charset="UTF-8">
+    <title>Localizer</title>
+  </head>
+  <body>
+    <div id="localizer">
+      <div id="photo">
+        <img class="caption" src="" />
+        <img class="ajax-loader" src="<%= url('images/ajax-loader.gif') %>" />
+      </div>
+
+      <div id="pickyourphoto"></div>
+
+      <div id="fields">
+        <div id="flags">
+          <div id="jp" class="icon"></div>
+          <div id="ko" class="icon"></div>
+          <div id="cn" class="icon"></div>
+          <div id="fr" class="icon"></div>
+          <div id="en" class="icon"></div>
+          <div class="clear"></div>
+        </div>
+
+        <div id="colors">
+          <div id="colorbtn1"><div></div></div>
+          <div id="colorbtn2"><div></div></div>
+          <div class="clear"></div>
+        </div>
+        <input class="color { pickerPosition: 'left' }" id="colorpicker1" />
+        <input class="color" id="colorpicker2" />
+        <div class="clear"></div>
+      </div>
+
+      <div id="messages" class="box">
+        <div class="top"></div>
+
+        <div class="inside">
+          <ul>
+            <% for m in @messages %>
+              <li>
+                <img src="<%= url("/images/#{m.category.icon_path}") %>" />
+                <p data-id="<%= m.id %>" class="message"><%= m.body %></p>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="bottom"></div>
+      </div>
+
+      <div id="studio" class="box">
+        <img class="ajax-loader" src="<%= url('images/ajax-loader.gif') %>" />
+        <div class="top"></div>
+        <div class="inside">
+        <div id="choice">
+          <span id="fbconnect" class="fb-button">Connect with Facebook!</span>
+
+          <hr />
+
+          <form id="imgform" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="finput">Upload your own photo!</label>
+            <input type="file" id="finput" name="image" />
+          </form>
+          <div class="clear"></div>
+        </div>
+
+        <div id="workspace">
+          <img class="cropme" src="" alt="" />
+          <div class="cropbutton"></div>
+        </div>
+
+        <ul id="fbstuff">
+
+        </ul>
+
+        <div class="clear"></div>
+</div>
+        <div class="bottom"></div>
+      </div>
+
+      <div id="share"></div>
+    </div>
+    <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+      if (!window.Asiance) {
+        window.Asiance = {
+          tmpl: {},
+          path: window.location.protocol + '//' + window.location.host,
+        };
+        window.Asiance.appId = '141297295948882';
+      }
+
+      if (typeof FB !== 'undefined') {
+        FB.Canvas.setSize({ height: 720, width: 510});
+        FB.init({
+          appId  : Asiance.appId,
+          status : true, // check login status
+          cookie : true, // enable cookies to allow the server to access the session
+          xfbml  : true  // parse XFBML
+        });
+      }
+    </script>
+      
+    <% if ENV['RAILS_ENV'] == 'prod' %>
+    <script type="text/javascript" src="<%= url('/localizer.min.js') %>"></script>
+
+    <% else %>
+    <script type="text/javascript" src="<%= url('/js/jquery-1.6.1.min.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/underscore-min.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/jquery-1.6.1.min.js') %>"></script>
+
+    <script type="text/javascript" src="<%= url('/js/jquery-ui-1.8.14.custom.min.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/jquery.form.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/jquery.Jcrop.min.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/jscolor.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/localizer.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/fb-main.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/js/color.js') %>"></script>
+    <% end %>
+  </body>
+</html>
