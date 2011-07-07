@@ -1,2 +1,8 @@
 /public/uploads
 /public/captions
+/logs
+/FONTS
+/public/lclz.min.css
+/public/lclz.min.js
+/config/lclzrnginx
+/localizer.db

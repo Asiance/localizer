@@ -1,0 +1,45 @@
+upstream lclzr_thin {
+  server unix:/tmp/lclzr.sock fail_timeout=0;
+}
+
+$server_name = 'example.com';
+$root = '/var/www/asiance/asiancefbapps/public';
+$access_log = '/var/www/asiance/asiancefbapps/logs/access.log';
+$error_log = '/var/www/asiance/asiancefbapps/logs/error.log';
+
+server {
+  listen 80 default;
+  server_name $server_name;
+
+  keepalive_timeout 5;
+
+  root $root;
+
+  access_log  = $access_log;
+  error_log   = $error_log;
+
+  error_page 500 502 503 504 /500.html;
+  error_page 404 /404.html;
+
+  location / {
+    # ?
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_set_header Host $http_host;
+    proxy_redirect off;       
+
+    # static -> serve
+    if (-f $request_filename) { 
+      expires 10y;
+      break; 
+    }
+
+    # dynamic -> get from upstream
+    if (!-f $request_filename) {
+      proxy_pass http://lclzr_thin;
+      break;
+    }
+  }
+}
+
+
