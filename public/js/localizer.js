@@ -109,11 +109,18 @@ $(function () {
         },
 
         workspace2choice: function () {
+            $studio.fadeOut('fast', function () {
+                // cleaning #studio
+                jcrop.destroy();
+
+                $studio.find('.jcrop-holder').remove();
+                $studio.find('.cropme').replaceWith('<img class="cropme" />');
                 $sloader.hide();
                 $workspace.hide();
                 $choice.show();
                 
                 ajaxizeForm();
+            });
         },
 
         clean: function () {
@@ -153,14 +160,7 @@ $(function () {
             var self = this;
             $ploader.show();
 
-            $studio.fadeOut('fast', function () {
-                // cleaning #studio
-                jcrop.destroy();
-
-                $studio.find('.jcrop-holder').remove();
-                $studio.find('.cropme').replaceWith('<img class="cropme" />');
-                self.workspace2choice();
-            });
+            self.workspace2choice();
 
             var url  = Asiance.path + '/cropped?' + $.param(Asiance.crop);
 
