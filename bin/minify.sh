@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-CSSFILE=public/lclz.min.css
-JSFILE=public/lclz.min.js
+CSSFILE=public/css/lclz.min.css
+JSFILE=public/js/lclz.min.js
 
 [ -f $CSSFILE ] && rm $CSSFILE
 [ -f $JSFILE ] && rm $JSFILE
