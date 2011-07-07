@@ -111,7 +111,9 @@ $(function () {
         workspace2choice: function () {
             $studio.fadeOut('fast', function () {
                 // cleaning #studio
-                jcrop.destroy();
+                if (typeof jcrop !== 'undefined') {
+                    jcrop.destroy();
+                }
 
                 $studio.find('.jcrop-holder').remove();
                 $studio.find('.cropme').replaceWith('<img class="cropme" />');

@@ -22,3 +22,6 @@ yuicompressor public/css/main.css >> $CSSFILE
 yuicompressor public/css/studio.css >> $CSSFILE
 
 echo 'Done.'
+
+scp public/css/lclz.min.css asiance@121.124.124.70:/var/www/asiance/asiancefb/public/css
+scp public/js/lclz.min.js asiance@121.124.124.70:/var/www/asiance/asiancefb/public/js

@@ -124,8 +124,6 @@ $(function () {
     }
 
     $('#share').bind('click', function (e) {
-        var path = window.location.protocol + '//' + window.location.host;
-
         if (Asiance.fbsession = FB.getSession()) {
             share_and_save();
         } else {
