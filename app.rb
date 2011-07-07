@@ -66,7 +66,7 @@ class Localizer < Sinatra::Application
 
       # TODO remove?
       caption.body
-    rescue
+    rescue 
       return status 400
     end
 
@@ -105,34 +105,19 @@ class Localizer < Sinatra::Application
 
   post '/upload' do
     unless params[:image] && 
-      (tmpfile = params[:image][:tempfile]) && 
-      (name = params[:image][:filename])
-
+      (tmpfile = params[:image][:tempfile])
       return status 400
     end
-
-    if not session[:session_id] then return 'fail.' end
     
-    filename = session[:session_id][0..15] + Time.now.to_i.to_s + '.png'
-    path = File.expand_path('..', __FILE__) + "/public/uploads/" + filename
-    session[:image_path] = path
-    session[:image_name] = filename
-
-    newf = File.open(path, 'w+')
-    until tmpfile.eof?
-      buf = tmpfile.read(65536)
-      newf.write(buf)
+    # saving to disk
+    begin
+      url = save_image_and_return_url(tmpfile)
+    rescue RuntimeError
+      return status 500
     end
 
-    # resize if too big
-    img = Image.read(path)[0]
-    if img.columns > 420 or img.rows > 360
-      img.resize_to_fit!(420, 360)
-      # TODO preserve big image!?
-      img.write(path)
-    end
-
-    url('/uploads/' + filename)
+    # returning public url to img
+    return url
   end
 
   post '/fbupload' do
@@ -140,46 +125,52 @@ class Localizer < Sinatra::Application
       return status 400
     end
 
-    # FIXME duplicate code with POST /upload above
-    if not session[:session_id] then return 'fail.' end
-
-    filename = session[:session_id][0..15] + Time.now.to_i.to_s + '.png'
-    path = File.expand_path('..', __FILE__) + "/public/uploads/" + filename
-    session[:image_path] = path
-    session[:image_name] = filename
-
     # contacting FB
     graph = Koala::Facebook::GraphAPI.new(params[:access_token])
-
     imgs = graph.get_object(params[:pid])['images']
+    
     # very large pics have an extra size
     pic = imgs.size > 4 ? imgs[1] : imgs[0]
 
-    # pic contains width, height, source
-    # open-uri loaded to open network streams
-    img = Image.read(pic['source'])[0]
-    if img.columns > 420 or img.rows > 360
-      img.resize_to_fit!(420, 360)
-      # TODO preserve big image!?
+    # saving to disk
+    begin
+      # opening url, requires open-uri
+      url = save_image_and_return_url(Kernel.open(pic['source']))
+    rescue RuntimeError
+      return status 500
     end
 
-    img.write(path)
-
-    url('/uploads/' + filename)
+    # returning public url to img
+    return url
   end
 
   get '/cropped' do
-    x = params[:x].to_i
-    y = params[:y].to_i
-    width = params[:w].to_i
-    height = params[:h].to_i
+    x = params[:x].to_f
+    y = params[:y].to_f
+    width = params[:w].to_f
+    height = params[:h].to_f
 
-    path = session[:image_path]
+    # height and width of reduced sized image shown in workspace
+    displayed_height = session[:thumb_height]
+    displayed_width  = session[:thumb_width]
 
+    # reading real size image
+    path = session[:large_path]
     img = Image.read(path)[0]
+
+    p params
+
+    # adapting to real large size
+    # and not the reduced image shown in workspace
+    x = x / displayed_width * img.columns
+    y = y / displayed_height * img.rows
+    width = width / displayed_width * img.columns
+    height = height / displayed_height * img.rows
+
     img.crop!(x, y, width, height)
     img.resize_to_fill!(Size, Size)
 
+    path = session[:image_path]
     img.write(path)
 
     # output
@@ -273,5 +264,41 @@ class Localizer < Sinatra::Application
     draw.text(x, y, caption.body)
 
     draw
+  end
+
+  def save_image_and_return_url (source)
+    if not session[:session_id] 
+      raise "No session_id!"
+    end
+
+    filename = session[:session_id][0..15] + Time.now.to_i.to_s + '.png'
+    path = File.expand_path('..', __FILE__) + "/public/uploads/" + filename
+    large_path = "/tmp/" + filename
+
+    session[:image_path] = path
+    session[:image_name] = filename
+    session[:large_path] = large_path
+
+    # keep large image for quality
+    newf = File.open(large_path, 'w+')
+    until source.eof?
+      buf = source.read(65536)
+      newf.write(buf)
+    end
+
+    # now reads from disk
+    img = Image.read(large_path)[0]
+
+    # .workspace size
+    if img.columns > 420 or img.rows > 420
+      img.resize_to_fit!(420, 420)
+    end
+
+    session[:thumb_height] = img.rows
+    session[:thumb_width]  = img.columns
+
+    img.write(path)
+
+    return url('/uploads/' + filename)
   end
 end
