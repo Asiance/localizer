@@ -1,4 +1,21 @@
 $(function () {
+    window.Asiance = {
+        tmpl: {},
+        path: window.location.protocol + '//' + window.location.host
+        c1: '#e62b47',
+        c2: '#34414d',
+        lang: 'ko',
+        caption: '1'
+    };
+
+    FB.Canvas.setSize({ height: 770, width: 510});
+    FB.init({
+        appId  : '141297295948882',
+        status : true, // check login status
+        cookie : true, // enable cookies to allow the server to access the session
+        xfbml  : true  // parse XFBML
+    });
+
     Asiance.$bigloader = $('#bigloader');
 
     var $studio = $('#studio');
@@ -15,15 +32,6 @@ $(function () {
       , $ploader = $photo.find('.ajax-loader')
       , $caption = $('#photo .caption')
       , $image = $('#photo .image');
-
-    if (typeof Asiance !== 'undefined') {
-        Asiance.caption = {
-            c1: '#e62b47',
-            c2: '#34414d',
-            lang: 'ko',
-            caption: '1'
-        }
-    }
 
     // click outside a box hides the current ui elements
     $('html').bind('click', function (event) {

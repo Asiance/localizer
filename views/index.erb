@@ -98,20 +98,6 @@
     </div>
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
-    <script>
-      window.Asiance = {
-        tmpl: {},
-        path: window.location.protocol + '//' + window.location.host
-      };
-
-      FB.Canvas.setSize({ height: 770, width: 510});
-      FB.init({
-        appId  : '141297295948882',
-        status : true, // check login status
-        cookie : true, // enable cookies to allow the server to access the session
-        xfbml  : true  // parse XFBML
-      });
-    </script>
       
     <% if ENV['RAILS_ENV'] == 'prod' %>
     <script type="text/javascript" src="<%= url('/js/lclz.min.js') %>"></script>
