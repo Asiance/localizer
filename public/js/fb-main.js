@@ -127,41 +127,14 @@ $(function () {
         var path = window.location.protocol + '//' + window.location.host;
 
         if (Asiance.fbsession = FB.getSession()) {
-                // adding access_token to data sent to server
-                Asiance.caption.access_token = Asiance.fbsession.access_token
-                Asiance.caption.uid = Asiance.fbsession.uid
-
-                // serializing
-                var data = $.param(Asiance.caption);
-
-                // sharing to wall
-                FB.ui({
-                    method: 'feed',
-                    name: 'Asiance Localizer',
-                    link: 'http://www.facebook.com/Asiance?sk=app_141297295948882',
-                    source: '',
-                    caption: 'Generate pictures and share them with your friends!',
-                    description: '',
-                    message: ''
-                }, function(response) {
-                    if (response && response.post_id) {
-                        // published
-                    } else {
-                        // not published
-                    }
-                });
-
-                // contacting server
-                // putting into album
-                $.post(path + '/share?' + data, function (data) {
-                    // do stuff after saving to album
-                });
+            share_and_save();
         } else {
             FB.login(function (response) {
                 //user didn't login or didnt authorize
                 // console.log('not logged in');
                 if (response.perms && response.session) {
                     Asiance.fbsession = response.session;
+                    share_and_save();
                 } else {
                     // not logged in
                 }
@@ -196,6 +169,38 @@ $(function () {
         $this = $(this);
         Photo.pick($this.data('photo'));
     });
+
+    function share_and_save () {
+        // adding access_token to data sent to server
+        Asiance.caption.access_token = Asiance.fbsession.access_token
+        Asiance.caption.uid = Asiance.fbsession.uid
+
+        // serializing
+        var postparams = $.param(Asiance.caption);
+
+        // sharing to wall
+        FB.ui({
+            method: 'feed',
+            name: 'Asiance Localizer',
+            link: 'http://www.facebook.com/Asiance?sk=app_141297295948882',
+            source: '',
+            caption: 'Generate pictures and share them with your friends!',
+            description: '',
+            message: ''
+        }, function(response) {
+            if (response && response.post_id) {
+                // published
+            } else {
+                // not published
+            }
+        });
+
+        // contacting server
+        // putting into album
+        $.post(Asiance.path + '/share?' + postparams, function (data) {
+            // do stuff after saving to album
+        });
+    }
 
     function token () {
         if (typeof Asiance.fbsession !== 'undefined') {

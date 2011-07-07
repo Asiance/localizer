@@ -99,23 +99,19 @@
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script>
-      if (!window.Asiance) {
-        window.Asiance = {
-          tmpl: {},
-          path: window.location.protocol + '//' + window.location.host,
-        };
-        window.Asiance.appId = '141297295948882';
-      }
+      window.Asiance = {
+        tmpl: {},
+        path: window.location.protocol + '//' + window.location.host,
+        appId: '141297295948882'
+      };
 
-      if (typeof FB !== 'undefined') {
-        FB.Canvas.setSize({ height: 770, width: 510});
-        FB.init({
-          appId  : Asiance.appId,
-          status : true, // check login status
-          cookie : true, // enable cookies to allow the server to access the session
-          xfbml  : true  // parse XFBML
-        });
-      }
+      FB.Canvas.setSize({ height: 770, width: 510});
+      FB.init({
+        appId  : Asiance.appId,
+        status : true, // check login status
+        cookie : true, // enable cookies to allow the server to access the session
+        xfbml  : true  // parse XFBML
+      });
     </script>
       
     <% if ENV['RAILS_ENV'] == 'prod' %>

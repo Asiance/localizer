@@ -14,18 +14,20 @@ $(function () {
       , $caption = $('#photo .caption')
       , $image = $('#photo .image');
 
-    if (Asiance) {
+    if (typeof Asiance !== 'undefined') {
         Asiance.caption = {
             c1: '#e62b47',
             c2: '#34414d',
             lang: 'ko',
-            caption: '1',
+            caption: '1'
         }
     }
 
     // click outside a box hides the current ui elements
     $('html').bind('click', function (event) {
         $studio.fadeOut();
+        Asiance.Studio.workspace2choice();
+
         $messages.fadeOut();
     });
 
