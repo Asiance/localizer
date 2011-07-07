@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <% if ENV['RAILS_ENV'] == 'prod' %>
-    <link type="text/css" rel="stylesheet" href="<%= url('/localizer.min.css') %>" />
+    <link type="text/css" rel="stylesheet" href="<%= url('/lclz.min.css') %>" />
 
     <% else %>
     <link type="text/css" rel="stylesheet" href="<%= url('/css/jquery.Jcrop.css') %>" />
@@ -118,13 +118,11 @@
     </script>
       
     <% if ENV['RAILS_ENV'] == 'prod' %>
-    <script type="text/javascript" src="<%= url('/localizer.min.js') %>"></script>
+    <script type="text/javascript" src="<%= url('/lclz.min.js') %>"></script>
 
     <% else %>
     <script type="text/javascript" src="<%= url('/js/jquery-1.6.1.min.js') %>"></script>
     <script type="text/javascript" src="<%= url('/js/underscore-min.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/jquery-1.6.1.min.js') %>"></script>
-
     <script type="text/javascript" src="<%= url('/js/jquery-ui-1.8.14.custom.min.js') %>"></script>
     <script type="text/javascript" src="<%= url('/js/jquery.form.js') %>"></script>
     <script type="text/javascript" src="<%= url('/js/jquery.Jcrop.min.js') %>"></script>

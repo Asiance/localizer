@@ -86,7 +86,6 @@ $(function () {
     }
     ajaxizeForm();
 
-    // FIXME organize functions in Studio object
     Asiance.Studio = {
         choice2workspace: function () {
             // hiding input

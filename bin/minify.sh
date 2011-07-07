@@ -6,15 +6,15 @@ JSFILE=public/lclz.min.js
 [ -f $CSSFILE ] && rm $CSSFILE
 [ -f $JSFILE ] && rm $JSFILE
 
-yuicompressor js/jquery-1.6.1.min.js >> $JSFILE
-yuicompressor js/jquery-ui-1.8.14.custom.min.js >> $JSFILE
-yuicompressor js/jquery.form.js >> $JSFILE
-yuicompressor js/underscore-min.js >> $JSFILE
-yuicompressor js/jscolor.js >> $JSFILE
-yuicompressor js/jquery.Jcrop.min.js >> $JSFILE
-yuicompressor js/localizer.js >> $JSFILE
-yuicompressor js/fb-main.js >> $JSFILE
-yuicompressor js/color.js >> $JSFILE
+yuicompressor public/js/jquery-1.6.1.min.js >> $JSFILE
+yuicompressor public/js/underscore-min.js >> $JSFILE
+yuicompressor public/js/jquery-ui-1.8.14.custom.min.js >> $JSFILE
+yuicompressor public/js/jquery.form.js >> $JSFILE
+yuicompressor public/js/jquery.Jcrop.min.js >> $JSFILE
+yuicompressor public/js/jscolor.js >> $JSFILE
+yuicompressor public/js/localizer.js >> $JSFILE
+yuicompressor public/js/fb-main.js >> $JSFILE
+yuicompressor public/js/color.js >> $JSFILE
 
 yuicompressor public/css/jquery.Jcrop.css >> $CSSFILE
 yuicompressor public/css/global.css >> $CSSFILE
