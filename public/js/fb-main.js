@@ -87,7 +87,7 @@ $(function () {
             Asiance.Studio.loading(true);
 
             // Clean all the thingz!
-            Asiance.Studio.clean();
+            $fbstuff.find('.fbalbum').remove();
 
             FB.api(a.id + '/photos?' + token(), function (data) {
                 Asiance.Studio.loading(false);
