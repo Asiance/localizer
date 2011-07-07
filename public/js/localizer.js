@@ -1,5 +1,5 @@
 $(function () {
-    Asiance.bigloader = $('#bigloader');
+    Asiance.$bigloader = $('#bigloader');
 
     var $studio = $('#studio');
 
