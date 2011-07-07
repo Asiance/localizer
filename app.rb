@@ -137,7 +137,8 @@ class Localizer < Sinatra::Application
       # opening url, requires open-uri
       url = save_image_and_return_url(Kernel.open(pic['source']))
     rescue RuntimeError
-      return status 500
+      status 500
+      return 'No session id'
     end
 
     # returning public url to img
