@@ -107,6 +107,7 @@ $(function () {
         },
 
         workspace2choice: function () {
+                $sloader.hide();
                 $workspace.hide();
                 $choice.show();
                 
@@ -147,6 +148,7 @@ $(function () {
         },
 
         crop: function () {
+            var self = this;
             $ploader.show();
 
             $studio.fadeOut('fast', function () {
@@ -155,8 +157,7 @@ $(function () {
 
                 $studio.find('.jcrop-holder').remove();
                 $studio.find('.cropme').replaceWith('<img class="cropme" />');
-
-                this.workspace2choice();
+                self.workspace2choice();
             });
 
             var url  = Asiance.path + '/cropped?' + $.param(Asiance.crop);
