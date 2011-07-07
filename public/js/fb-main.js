@@ -36,7 +36,7 @@ $(function () {
                 var obj = {
                     source: url,
                     name: name
-                }
+                };
 
                 // when pic is ready, we insert the photo into the dom
                 // attaching the corresponding js object to it
@@ -69,7 +69,7 @@ $(function () {
                         var obj = {
                             source: url,
                             name: name
-                        }
+                        };
 
                         // when pic is ready, we insert the album into the dom
                         // attaching the corresponding js object to it
@@ -172,8 +172,8 @@ $(function () {
         Asiance.$bigloader.show();
 
         // adding access_token to data sent to server
-        Asiance.caption.access_token = Asiance.fbsession.access_token
-        Asiance.caption.uid = Asiance.fbsession.uid
+        Asiance.caption.access_token = Asiance.fbsession.access_token;
+        Asiance.caption.uid = Asiance.fbsession.uid;
 
         // serializing
         var postparams = $.param(Asiance.caption);
