@@ -2,7 +2,7 @@
 /public/captions
 /logs
 /FONTS
-/public/lclz.min.css
-/public/lclz.min.js
+/public/css/lclz.min.css
+/public/js/lclz.min.js
 /config/lclzrnginx
 /localizer.db
