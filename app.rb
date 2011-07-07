@@ -192,15 +192,17 @@ class Localizer < Sinatra::Application
 
     # polaroid effect
     degrees = -3
+ 
+    # i dont know why there's a 10px difference with toshop..
     margin_x = 84
-    margin_y = 80
+    margin_y = 80 - 10
 
     # need to adapt to polaroid layout
     x = params[:x].to_i
     y = params[:y].to_i
 
     # bigger canvas to be able to put caption under the picture (pola-style)
-    canvas = Image.new(Size, Size + 70) {
+    canvas = Image.new(Size, Size + 80) {
       self.background_color = 'none'
     }
 
