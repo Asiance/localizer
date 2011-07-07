@@ -16,8 +16,8 @@ $(function () {
 
     if (Asiance) {
         Asiance.caption = {
-            c1: '#ffffff',
-            c2: '#000000',
+            c1: '#e62b47',
+            c2: '#34414d',
             lang: 'ko',
             caption: '1',
         }
