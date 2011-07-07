@@ -103,7 +103,7 @@ $(function () {
         },
 
         fetch: function () {
-            self = this;
+            var self = this;
             if (typeof Asiance.fbsession !== 'undefined') {
                 // cleanup ui
                 $('#choice').fadeOut('slow');
