@@ -111,7 +111,7 @@ $(function () {
                 $choice.show();
                 
                 ajaxizeForm();
-        }
+        },
 
         clean: function () {
             // erasing fb albums / photos
