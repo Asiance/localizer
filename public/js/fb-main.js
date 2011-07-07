@@ -169,6 +169,8 @@ $(function () {
     });
 
     function share_and_save () {
+        Asiance.$bigloader.show();
+
         // adding access_token to data sent to server
         Asiance.caption.access_token = Asiance.fbsession.access_token
         Asiance.caption.uid = Asiance.fbsession.uid
@@ -176,27 +178,27 @@ $(function () {
         // serializing
         var postparams = $.param(Asiance.caption);
 
-        // sharing to wall
-        FB.ui({
-            method: 'feed',
-            name: 'Asiance Localizer',
-            link: 'http://www.facebook.com/Asiance?sk=app_141297295948882',
-            source: '',
-            caption: 'Generate pictures and share them with your friends!',
-            description: '',
-            message: ''
-        }, function(response) {
-            if (response && response.post_id) {
-                // published
-            } else {
-                // not published
-            }
-        });
-
         // contacting server
         // putting into album
-        $.post(Asiance.path + '/share?' + postparams, function (data) {
-            // do stuff after saving to album
+        $.post(Asiance.path + '/share?' + postparams, function (url) {
+            Asiance.$bigloader.hide();
+
+            // sharing to wall
+            FB.ui({
+                method: 'feed',
+                name: 'Asiance Localizer',
+                link: 'http://www.facebook.com/Asiance?sk=app_141297295948882',
+                source: url,
+                caption: 'Generate pictures and share them with your friends!',
+                description: '',
+                message: ''
+            }, function(response) {
+                if (response && response.post_id) {
+                    // published
+                } else {
+                    // not published
+                }
+            });
         });
     }
 

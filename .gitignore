@@ -4,5 +4,7 @@
 /FONTS
 /public/css/lclz.min.css
 /public/js/lclz.min.js
-/config/lclzrnginx
+/config/nginx
 /localizer.db
+/log
+/tmp

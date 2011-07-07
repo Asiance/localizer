@@ -287,3 +287,10 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
   background-position: 0 -66px;
 }
 
+#bigloader {
+    cursor: auto;
+    display: none;
+    left: 132px;
+    position: absolute;
+    top: 132px;
+}

@@ -86,7 +86,6 @@
 
         <ul id="fbstuff">
           <h2></h2>
-
         </ul>
 
         <div class="clear"></div>
@@ -94,6 +93,7 @@
         <div class="bottom"></div>
       </div>
 
+      <img id="bigloader" src="<%= url('images/ajax-loader.gif') %>" />
       <div id="share"></div>
     </div>
     <div id="fb-root"></div>
@@ -101,13 +101,12 @@
     <script>
       window.Asiance = {
         tmpl: {},
-        path: window.location.protocol + '//' + window.location.host,
-        appId: '141297295948882'
+        path: window.location.protocol + '//' + window.location.host
       };
 
       FB.Canvas.setSize({ height: 770, width: 510});
       FB.init({
-        appId  : Asiance.appId,
+        appId  : '141297295948882',
         status : true, // check login status
         cookie : true, // enable cookies to allow the server to access the session
         xfbml  : true  // parse XFBML

@@ -1,10 +1,12 @@
 $(function () {
-    var $studio = Asiance.$studio = $('#studio');
+    Asiance.bigloader = $('#bigloader');
+
+    var $studio = $('#studio');
 
     var $pickyourphoto = $('#pickyourphoto')
       , $workspace = $studio.find('#workspace')
       , $choice = $('#choice')
-      , $sloader = Asiance.$sloader = $studio.find('.ajax-loader')
+      , $sloader = $studio.find('.ajax-loader')
       , $imgform = $('#imgform')
       , $finput = $imgform.find('input[type=file]')
       , $messages = $('#messages')
@@ -83,6 +85,7 @@ $(function () {
             success: function (data) {
                 // check if nginx sent 'request too large'
                 if (/413/.test(data)) {
+                    $studio.fadeOut();
                     Asiance.Studio.workspace2choice();
                     alert('This file is too big! (4MB max)');
                     return;
@@ -97,11 +100,9 @@ $(function () {
 
     Asiance.Studio = {
         choice2workspace: function () {
-            // hiding input
             $choice.hide();
 
-            this.clean();
-            this.fb(false);
+            this.clean_fb();
 
             // displaying stu-stu-studiooo's workspace
             $workspace.show();
@@ -109,33 +110,26 @@ $(function () {
         },
 
         workspace2choice: function () {
-            $studio.fadeOut('fast', function () {
-                // cleaning #studio
-                if (typeof jcrop !== 'undefined') {
-                    jcrop.destroy();
-                }
+            // cleaning #studio
+            if (typeof jcrop !== 'undefined') {
+                jcrop.destroy();
+            }
 
-                $studio.find('.jcrop-holder').remove();
-                $studio.find('.cropme').replaceWith('<img class="cropme" />');
-                $sloader.hide();
-                $workspace.hide();
-                $choice.show();
-                
-                ajaxizeForm();
-            });
+            $studio.find('.jcrop-holder').remove();
+            $studio.find('.cropme').replaceWith('<img class="cropme" />');
+            $sloader.hide();
+            $workspace.hide();
+            $choice.show();
+
+            ajaxizeForm();
         },
 
-        clean: function () {
+        clean_fb: function () {
+            $studio.find('#fbstuff').hide();
             // erasing fb albums / photos
             // FIXME don't remove, keep in cache?
             // what if user uploads a new photo in the meantime?
             $studio.find('.fbphoto, .fbalbum').remove();
-        },
-        
-        fb: function (truth) {
-            truth ? 
-                $studio.find('#fbstuff').show() :
-                $studio.find('#fbstuff').hide();
         },
 
         init_workspace: function (url) {
@@ -162,6 +156,7 @@ $(function () {
             var self = this;
             $ploader.show();
 
+            $studio.fadeOut();
             self.workspace2choice();
 
             var url  = Asiance.path + '/cropped?' + $.param(Asiance.crop);
