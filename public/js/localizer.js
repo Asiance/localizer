@@ -79,6 +79,13 @@ $(function () {
                 Asiance.Studio.choice2workspace();
             },
             success: function (data) {
+                // check if nginx sent 'request too large'
+                if (/413/.test(data)) {
+                    Asiance.Studio.workspace2choice();
+                    alert('This file is too big! (4MB max)');
+                    return;
+                }
+
                 // data is url
                 Asiance.Studio.init_workspace(data);
             }
@@ -98,6 +105,13 @@ $(function () {
             $workspace.show();
             $sloader.show();
         },
+
+        workspace2choice: function () {
+                $workspace.hide();
+                $choice.show();
+                
+                ajaxizeForm();
+        }
 
         clean: function () {
             // erasing fb albums / photos
@@ -142,10 +156,7 @@ $(function () {
                 $studio.find('.jcrop-holder').remove();
                 $studio.find('.cropme').replaceWith('<img class="cropme" />');
 
-                $workspace.hide();
-                $choice.show();
-                
-                ajaxizeForm();
+                this.workspace2choice();
             });
 
             var url  = Asiance.path + '/cropped?' + $.param(Asiance.crop);
