@@ -1,21 +1,27 @@
 
 
 CREATE TABLE "categories" ("id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "name" TEXT, "icon_path" TEXT, "created_at" TIMESTAMP);
-INSERT INTO "categories" VALUES (1, 'Birthday', 'cupcake.png', '2011-06-29 23:06:37');
+INSERT INTO "categories" VALUES (1, 'Birthday', 'birthday_icon.png', '2011-06-29 23:06:37');
 INSERT INTO "categories" VALUES (2, 'Love', 'luv.png', '2011-06-29 23:06:37');
+INSERT INTO "categories" VALUES (3, 'Fun', 'fun_icon.png', NULL);
+INSERT INTO "categories" VALUES (4, 'getwell', 'getwell.png', NULL);
+INSERT INTO "categories" VALUES (5, 'kiss', 'kiss_icon.png', NULL);
+INSERT INTO "categories" VALUES (6, 'newyear', 'champagne_icon.png', NULL);
+INSERT INTO "categories" VALUES (7, 'voyage', 'voyage_icon.png', NULL);
+INSERT INTO "categories" VALUES (8, 'congz', 'champagne_icon.png', NULL);
 
 
 CREATE TABLE "messages" ("id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "body" TEXT, "created_at" TIMESTAMP, "category_id" INTEGER NOT NULL);
 INSERT INTO "messages" VALUES (1, 'I love you!', '2011-06-29 23:06:37', 2);
-INSERT INTO "messages" VALUES (2, 'Kiss', NULL, 2);
+INSERT INTO "messages" VALUES (2, 'Kiss', NULL, 5);
 INSERT INTO "messages" VALUES (3, 'I miss you', NULL, 2);
 INSERT INTO "messages" VALUES (4, 'I''m crazy about you', NULL, 2);
-INSERT INTO "messages" VALUES (5, 'Congratulations!', NULL, 1);
-INSERT INTO "messages" VALUES (6, 'Happy new year', '', 2);
+INSERT INTO "messages" VALUES (5, 'Congratulations!', NULL, 8);
+INSERT INTO "messages" VALUES (6, 'Happy new year', '', 6);
 INSERT INTO "messages" VALUES (7, 'Happy birthday!', '2011-06-29 23:06:37', 1);
-INSERT INTO "messages" VALUES (8, 'Bon voyage', '', 1);
-INSERT INTO "messages" VALUES (9, 'Have fun', '', 2);
-INSERT INTO "messages" VALUES (10, 'Get well soon', '', 2);
+INSERT INTO "messages" VALUES (8, 'Bon voyage', '', 7);
+INSERT INTO "messages" VALUES (9, 'Have fun', '', 3);
+INSERT INTO "messages" VALUES (10, 'Get well soon', '', 4);
 
 
 CREATE TABLE "translations" (
