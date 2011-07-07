@@ -40,7 +40,7 @@ INSERT INTO "translations" VALUES ('吻', '', 'cn', 2, 81, 'KaiTi');
 INSERT INTO "translations" VALUES ('뽀뽀~', NULL, 'ko', 2, 69, 'SD_Puzzle Bk');
 INSERT INTO "translations" VALUES ('보고싶어..!', NULL, 'ko', 3, 61, 'SD_PicasoB');
 INSERT INTO "translations" VALUES ('너에게빠졌어!', NULL, 'ko', 4, 50, 'SD_PicasoB');
-INSERT INTO "translations" VALUES ('축하해요! ', NULL, 'ko', 5, 72, 'SD DanA-M');
+INSERT INTO "translations" VALUES ('축하해요!', NULL, 'ko', 5, 72, 'SD DanA-M');
 INSERT INTO "translations" VALUES ('새해복많이받으세요', NULL, 'ko', 6, 36, 'SD DanA-M');
 INSERT INTO "translations" VALUES ('여행잘다녀오세요', NULL, 'ko', 8, 41, 'SD_PicasoB');
 INSERT INTO "translations" VALUES ('잘놀다와^^', NULL, 'ko', 9, 60, 'SD_PicasoB');
@@ -54,7 +54,7 @@ INSERT INTO "translations" VALUES ('祝你旅途愉快', NULL, 'cn', 8, 47, 'Kai
 INSERT INTO "translations" VALUES ('玩得开心点', NULL, 'cn', 9, 47, 'KaiTi');
 INSERT INTO "translations" VALUES ('早日康复', '', 'cn', 10, 55, 'KaiTi');
 INSERT INTO "translations" VALUES ('Je t''aime', NULL, 'fr', 1, 62, 'Jellyka -ove and Passion');
-INSERT INTO "translations" VALUES ('Bisous!', NULL, 'fr', 2, 125, 'Words of love');
+INSERT INTO "translations" VALUES ('Bisous', NULL, 'fr', 2, 110, 'Words of love');
 INSERT INTO "translations" VALUES ('Tu me manques', NULL, 'fr', 3, 70, 'MC Sweetie Hearts');
 INSERT INTO "translations" VALUES ('Je suis fou de toi!', NULL, 'fr', 4, 34, 'Jellyka -ove and Passion');
 INSERT INTO "translations" VALUES ('Félicitations!', NULL, 'fr', 5, 58, 'Rage Italic');
