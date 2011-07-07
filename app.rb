@@ -227,15 +227,17 @@ class Localizer < Sinatra::Application
                            OverCompositeOp)
 
 
-    image.write(path)
+    result_path =
+      File.expand_path('..', __FILE__) + "/public/uploads/r" + session[:image_name]
+    image.write(result_path)
 
     # contacting FB
     graph = Koala::Facebook::GraphAPI.new(params[:access_token])
-    graph.put_picture(path)
+    graph.put_picture(result_path)
 
     # TODO delete photo from disk
 
-    url('/uploads/' + session[:image_name])
+    url('/uploads/r' + session[:image_name])
   end
 
   # Draws text with outline: caption at position x,y
@@ -274,8 +276,8 @@ class Localizer < Sinatra::Application
     end
 
     filename = session[:session_id][0..15] + Time.now.to_i.to_s + '.png'
-    path = File.expand_path('..', __FILE__) + "/public/uploads/" + filename
-    large_path = "/tmp/" + filename
+    path = File.expand_path('..', __FILE__) + '/public/uploads/' + filename
+    large_path = '/tmp/' + filename
 
     session[:image_path] = path
     session[:image_name] = filename

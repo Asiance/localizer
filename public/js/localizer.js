@@ -206,8 +206,6 @@ $(function () {
 
             Asiance.caption.x = Math.round(ui.position.left);
             Asiance.caption.y = Math.round(ui.position.top);
-
-            console.log(ui.position);
         }
     }).bind('mousedown', function (event) {
         $(this).css('cursor', 'move');

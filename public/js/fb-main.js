@@ -134,17 +134,12 @@ $(function () {
                 // serializing
                 var data = $.param(Asiance.caption);
 
-                
-                // contacting server
-                // putting into album
-                $.post(path + '/share?' + data, function (data) {
-                    // do stuff after saving to album
                 // sharing to wall
                 FB.ui({
                     method: 'feed',
                     name: 'Asiance Localizer',
-                    link: 'http://www.facebook.com/Asiance',
-                    picture: '',
+                    link: 'http://www.facebook.com/Asiance?sk=app_141297295948882',
+                    source: '',
                     caption: 'Generate pictures and share them with your friends!',
                     description: '',
                     message: ''
@@ -155,6 +150,11 @@ $(function () {
                         // not published
                     }
                 });
+
+                // contacting server
+                // putting into album
+                $.post(path + '/share?' + data, function (data) {
+                    // do stuff after saving to album
                 });
         } else {
             FB.login(function (response) {
