@@ -91,7 +91,7 @@ $(function () {
 
             FB.api(a.id + '/photos?' + token(), function (data) {
                 Asiance.Studio.loading(false);
-                $fbstuff.find('h2').text('Your photos');
+                $fbstuff.find('h2').text('Your Photos');
 
                 a.photos = data.data;
 
@@ -113,7 +113,7 @@ $(function () {
                 FB.api('/me/albums?' + token(), function (data) {
                     Asiance.Studio.loading(false);
                     Asiance.albums = data.data;
-                    $('<h2>Your Albums</h2>').prependTo($fbstuff);
+                    $fbstuff.find('h2').text('Your Albums');
 
                     _(Asiance.albums).forEach(function (a) {
                         Album.render(a);
