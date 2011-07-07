@@ -2,7 +2,7 @@ $(function () {
     window.Asiance = {
         tmpl: {},
         path: window.location.protocol + '//' + window.location.host,
-        Caption: {
+        caption: {
             c1: '#e62b47',
             c2: '#34414d',
             lang: 'ko',
