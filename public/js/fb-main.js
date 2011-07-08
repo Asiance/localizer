@@ -183,7 +183,6 @@ $(function () {
             
             // lynx: "imagesource#linktoimage"
             var split = lynx.split('#');
-            console.log(lynx, split);
 
             // sharing to wall
             // https://www.facebook.com/photo.php?fbid=' + split[1]
