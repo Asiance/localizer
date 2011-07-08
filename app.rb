@@ -182,8 +182,10 @@ class Localizer < Sinatra::Application
 
   post '/share' do
     # normalizing params
-    if params[:x].empty? then params[:x] = '0' end 
-    if params[:y].empty? then params[:y] = '0' end 
+    if not params[:x] or params[:x].empty? or not params[:y] or params[:y].empty?
+      status 400
+      return 'Specify x and y'
+    end
 
     path = session[:image_path]
 
@@ -234,11 +236,11 @@ class Localizer < Sinatra::Application
 
     # contacting FB
     graph = Koala::Facebook::GraphAPI.new(params[:access_token])
-    graph.put_picture(result_path)
+    fbpic = graph.put_picture(result_path)
 
-    # TODO delete photo from disk
+    # TODO delete photo from disk?
 
-    url('/uploads/r' + session[:image_name])
+    url('/uploads/r' + session[:image_name]) + '#' + fbpic['id']
   end
 
   # Draws text with outline: caption at position x,y

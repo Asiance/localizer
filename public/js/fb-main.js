@@ -178,18 +178,35 @@ $(function () {
 
         // contacting server
         // putting into album
-        $.post(Asiance.path + '/share', Asiance.caption, function (url) {
+        $.post(Asiance.path + '/share', Asiance.caption, function (lynx) {
             Asiance.$bigloader.hide();
+            
+            // lynx: "imagesource#linktoimage"
+            var split = lynx.split('#');
+            console.log(lynx, split);
 
             // sharing to wall
+            // https://www.facebook.com/photo.php?fbid=' + split[1]
             FB.ui({
                 method: 'feed',
                 name: 'Asiance Localizer',
-                link: 'http://www.facebook.com/Asiance?sk=app_141297295948882',
-                source: url,
+                link: 'https://www.facebook.com/Asiance?sk=app_141297295948882',
+                source: split[0],
                 caption: 'Generate pictures and share them with your friends!',
-                description: '',
-                message: ''
+                properties: {
+                    'Photo': {
+                        text: 'Zoom',
+                        href: 'https://www.facebook.com/photo.php?fbid=' + split[1],
+                    },
+                    'Find out more': {
+                        text: 'Asiance Localizer',
+                        href: 'https://www.facebook.com/Asiance?sk=app_141297295948882'
+                    }
+                },
+                actions: {
+                    name: "Make your own",
+                    link: 'https://www.facebook.com/Asiance?sk=app_141297295948882'
+                }
             }, function(response) {
                 if (response && response.post_id) {
                     // published
