@@ -159,16 +159,15 @@ class Localizer < Sinatra::Application
     path = session[:large_path]
     img = Image.read(path)[0]
 
-    p params
-
     # adapting to real large size
     # and not the reduced image shown in workspace
     x = x / displayed_width * img.columns
     y = y / displayed_height * img.rows
-    width = width / displayed_width * img.columns
-    height = height / displayed_height * img.rows
+    width = (width / displayed_width * img.columns).to_i
+    # height = height / displayed_height * img.rows
 
-    img.crop!(x, y, width, height)
+    # should be square anyway.
+    img.crop!(x, y, width, width)
     img.resize_to_fill!(Size, Size)
 
     path = session[:image_path]
