@@ -299,18 +299,16 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
     left: 32px;
     opacity: 1;
     position: absolute;
+    text-align: center;
     top: 192px;
     width: 434px;
 }
 
 #bigloader img {
-    left: 183px;
-    position: absolute;
-    top: 23px;
+    position: relative;
+    margin-top: 23px;
 }
 
 #bigloader h2 {
-    left: 174px;
-    position: absolute;
-    top: 100px;
+    position: relative;
 }

@@ -18,8 +18,6 @@ $(function () {
         xfbml  : true  // parse XFBML
     });
 
-    Asiance.$bigloader = $('#bigloader');
-
     var $studio = $('#studio');
 
     var $pickyourphoto = $('#pickyourphoto')
@@ -32,8 +30,48 @@ $(function () {
       , $refresh = $('#refresh')
       , $photo = $('#photo')
       , $ploader = $photo.find('.ajax-loader')
+      , $bigloader = $('#bigloader')
       , $caption = $('#photo .caption')
       , $image = $('#photo .image');
+
+    Asiance.Bigloader = {
+        text: function (txt) {
+            $bigloader.find('h2').text(txt);
+        },
+        show: function () {
+            $bigloader.show();
+        },
+        hide: function () {
+            $bigloader.hide();
+            $bigloader.find('h2')
+              .text('Localizing...');
+        },
+        fadeOut: function () {
+            $bigloader.fadeOut(function () {
+                $bigloader.find('h2')
+                  .text('Localizing...');
+            });
+        },
+        done: function (callback) {
+            var self = this;
+
+            self.text('The photo has been uploaded to your album!');
+
+            setTimeout(function () {
+                self.fadeOut();
+                callback();
+            }, 2000);
+        },
+        error: function () {
+            var self = this;
+
+            $bigloader.find('h2')
+              .html('Something went wrong...<br />Did you select an image and a caption?');
+
+            setTimeout(self.fadeOut, 2800);
+        }
+    };
+
 
     // click outside a box hides the current ui elements
     $('html').bind('click', function (event) {

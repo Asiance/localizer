@@ -170,7 +170,7 @@ $(function () {
     });
 
     function share_and_save () {
-        Asiance.$bigloader.show();
+        Asiance.Bigloader.show();
 
         // adding access_token to data sent to server
         Asiance.caption.access_token = Asiance.fbsession.access_token;
@@ -178,9 +178,23 @@ $(function () {
 
         // contacting server
         // putting into album
-        $.post(Asiance.path + '/share', Asiance.caption, function (lynx) {
-            Asiance.$bigloader.hide();
-            
+        $.ajax({
+            url: Asiance.path + '/share',
+            type: 'POST',
+            data: Asiance.caption,
+            error: function (lynx) {
+                Asiance.Bigloader.error();
+            },
+            success: function (lynx) {
+                Asiance.Bigloader.done(function () {
+                    Asiance.FB.sharedialog(lynx);
+                });
+            }
+        });
+    }
+
+    Asiance.FB = {
+        sharedialog: function (lynx) {
             // lynx: "imagesource#linktoimage"
             var split = lynx.split('#');
 
@@ -195,7 +209,7 @@ $(function () {
                 properties: {
                     'Photo': {
                         text: 'Zoom',
-                        href: 'https://www.facebook.com/photo.php?fbid=' + split[1],
+                        href: 'https://www.facebook.com/photo.php?fbid=' + split[1] + '&theater',
                     },
                     'Find out more': {
                         text: 'Asiance Localizer',
@@ -213,8 +227,8 @@ $(function () {
                     // not published
                 }
             });
-        });
-    }
+        }
+    };
 
     function token () {
         if (typeof Asiance.fbsession !== 'undefined') {

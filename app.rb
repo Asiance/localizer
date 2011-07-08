@@ -182,7 +182,7 @@ class Localizer < Sinatra::Application
   post '/share' do
     # normalizing params
     if not params[:x] or params[:x].empty? or not params[:y] or params[:y].empty?
-      status 400
+      status 500
       return 'Specify x and y'
     end
 
