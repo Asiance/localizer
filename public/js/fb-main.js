@@ -20,7 +20,7 @@ $(function () {
             });
         },
         render: function (p) {
-            var url = p.picture;
+            var url = p.picture + '?' + (new Date()).getTime();
 
             $('<img />')
             .attr('src', url)
@@ -51,7 +51,7 @@ $(function () {
         render: function (a) {
             if (typeof a.cover_photo !== 'undefined') {
                 FB.api(a.cover_photo + '?' + token(), function (data) {
-                    var url = data.picture;
+                    var url = data.picture + '?' + (new Date()).getTime();
 
                     // 2 is small (130x130)
                     $('<img />')
