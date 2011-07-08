@@ -184,7 +184,7 @@ $(function () {
         loading: function (truth) {
             truth ? $sloader.show() : $sloader.hide();
         }
-    }
+    };
 
 /*
                  _   _             
@@ -202,7 +202,7 @@ $(function () {
             $caption[0].src = Asiance.path + '/caption?' + data;
             $caption.show();
         }
-    }
+    };
 
     $caption.draggable({
         containment: 'parent',

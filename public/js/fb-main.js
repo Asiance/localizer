@@ -45,13 +45,13 @@ $(function () {
                     .appendTo($fbstuff);
             });
         }
-    }
+    };
 
     var Album = {
         render: function (a) {
             if (typeof a.cover_photo !== 'undefined') {
                 FB.api(a.cover_photo + '?' + token(), function (data) {
-                    var url = data.picture
+                    var url = data.picture;
 
                     // 2 is small (130x130)
                     $('<img />')
@@ -77,7 +77,7 @@ $(function () {
                         .data('album', a)
                         .appendTo($fbstuff);
                     });
-                })
+                });
             } else {
                 // 'anonymous' photo
             }
@@ -121,7 +121,7 @@ $(function () {
                 });
             }
         }
-    }
+    };
 
     $('#share').bind('click', function (e) {
         if (Asiance.fbsession = FB.getSession()) {
@@ -152,9 +152,10 @@ $(function () {
                     // FIXME duplicate above
                     Asiance.Studio.loading(true);
                     Album.fetch();
+                } else {
+                    console.log('fail');
                 }
             }, { perms: 'publish_stream,user_photos' });
-            console.log('fail');
         }
     });
 
@@ -175,12 +176,9 @@ $(function () {
         Asiance.caption.access_token = Asiance.fbsession.access_token;
         Asiance.caption.uid = Asiance.fbsession.uid;
 
-        // serializing
-        var postparams = $.param(Asiance.caption);
-
         // contacting server
         // putting into album
-        $.post(Asiance.path + '/share?' + postparams, function (url) {
+        $.post(Asiance.path + '/share', Asiance.caption, function (url) {
             Asiance.$bigloader.hide();
 
             // sharing to wall
