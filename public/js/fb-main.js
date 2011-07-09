@@ -54,7 +54,7 @@ $(function () {
                 //     var url = data.picture;
 
                 var url = 
-                    'https://graph.facebook.com/' + a.id + '/picture?type=thumbnail&' + token();
+                    'https://graph.facebook.com/' + a.id + '/picture?type=small&' + token();
                     // 2 is small (130x130)
                     $('<img />')
                     .load(function () {
