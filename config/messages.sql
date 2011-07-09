@@ -63,7 +63,7 @@ INSERT INTO "translations" VALUES ('Soigne-toi bien', NULL, 'fr', 10, 65, 'Chris
 INSERT INTO "translations" VALUES ('Bon anniversaire!', NULL, 'fr', 7, 37, 'Set Fire to the Rain');
 INSERT INTO "translations" VALUES ('Bon voyage!', NULL, 'fr', 8, 86, 'Christopherhand');
 INSERT INTO "translations" VALUES ('Amuse-toi bien!', NULL, 'fr', 9, 71, 'Christopherhand');
-INSERT INTO "translations" VALUES ('I love you♡', NULL, 'en', 1, 62, 'Jellyka -ove and Passion');
+INSERT INTO "translations" VALUES ('I love you', NULL, 'en', 1, 50, 'Jellyka -ove and Passion');
 INSERT INTO "translations" VALUES ('Kiss', NULL, 'en', 2, 140, 'Words of love');
 INSERT INTO "translations" VALUES ('I miss you!', NULL, 'en', 3, 49, 'Daniel Black');
 INSERT INTO "translations" VALUES ('I''m crazy about you', NULL, 'en', 4, 34, 'Jellyka -ove and Passion');
