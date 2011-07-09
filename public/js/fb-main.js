@@ -20,10 +20,9 @@ $(function () {
             });
         },
         render: function (p) {
-            var url = p.picture + '?' + (new Date()).getTime();
+            var url = p.picture;
 
             $('<img />')
-            .attr('src', url)
             .load(function () {
                 var name = p.name;
 
@@ -43,7 +42,8 @@ $(function () {
                 $(Asiance.tmpl.photo(obj))
                     .data('photo', p)
                     .appendTo($fbstuff);
-            });
+            })
+            .attr('src', url);
         }
     };
 
@@ -51,12 +51,10 @@ $(function () {
         render: function (a) {
             if (typeof a.cover_photo !== 'undefined') {
                 FB.api(a.cover_photo + '?' + token(), function (data) {
-                    var url = data.picture + '?' + (new Date()).getTime();
+                    var url = data.picture;
 
                     // 2 is small (130x130)
                     $('<img />')
-                    .attr('src', url)
-                    .data('album', a)
                     .load(function () {
                         var name = a.name;
 
@@ -76,7 +74,9 @@ $(function () {
                         $(Asiance.tmpl.album(obj))
                         .data('album', a)
                         .appendTo($fbstuff);
-                    });
+                    })
+                    .attr('src', url)
+                    .data('album', a);
                 });
             } else {
                 // 'anonymous' photo

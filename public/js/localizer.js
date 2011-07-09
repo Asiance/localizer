@@ -245,12 +245,14 @@ $(function () {
               .load(function () {
                   var $this = $(this);
 
+                  var r = Math.round;
+
                   // slide element to the white area, bottom of the pic
                   // trying to center it horizontally and vertically too
                   var white_area_height = 80
-                    , margin = Math.max((white_area_height - $this.height())/2, 0)
+                    , margin = Math.max(r((white_area_height - $this.height())/2), 0)
                     , newtop = $photo.height() - $this.height() - margin
-                    , newleft = ($photo.width() - $this.width()) / 2;
+                    , newleft = r(($photo.width() - $this.width()) / 2);
 
                   $this.animate({
                       top: newtop + 'px',
