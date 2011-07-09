@@ -73,8 +73,9 @@ $(function () {
 
     // click outside a box hides the current ui elements
     $('html').bind('click', function (event) {
-        $studio.fadeOut();
-        Asiance.Studio.workspace2choice();
+        $studio.fadeOut(function () {
+            Asiance.Studio.workspace2choice();
+        });
 
         $messages.fadeOut();
     });
@@ -151,6 +152,7 @@ $(function () {
             this.clean_fb();
 
             // displaying stu-stu-studiooo's workspace
+            $workspace.find('.cropbutton').hide();
             $workspace.show();
             $sloader.show();
         },
@@ -160,6 +162,8 @@ $(function () {
             if (typeof jcrop !== 'undefined') {
                 jcrop.destroy();
             }
+
+            this.clean_fb();
 
             $studio.find('.jcrop-holder').remove();
             $studio.find('.cropme').replaceWith('<img class="cropme" />');

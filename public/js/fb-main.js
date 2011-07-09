@@ -50,9 +50,11 @@ $(function () {
     var Album = {
         render: function (a) {
             if (typeof a.cover_photo !== 'undefined') {
-                FB.api(a.cover_photo + '?' + token(), function (data) {
-                    var url = data.picture;
+                // FB.api(a.cover_photo + '?' + token(), function (data) {
+                //     var url = data.picture;
 
+                var url = 
+                    'https://graph.facebook.com/' + a.id + '/picture?type=thumbnail&' + token();
                     // 2 is small (130x130)
                     $('<img />')
                     .load(function () {
@@ -77,7 +79,7 @@ $(function () {
                     })
                     .attr('src', url)
                     .data('album', a);
-                });
+                // });
             } else {
                 // 'anonymous' photo
             }
@@ -89,7 +91,7 @@ $(function () {
             // Clean all the thingz!
             $fbstuff.find('.fbalbum').remove();
 
-            FB.api(a.id + '/photos?' + token(), function (data) {
+            FB.api(a.id + '/photos?limit=51&' + token(), function (data) {
                 Asiance.Studio.loading(false);
                 $fbstuff.find('h2').text('Your Photos');
 
@@ -104,13 +106,20 @@ $(function () {
 
         fetch: function () {
             var self = this;
+
+            // cleaning previous fb stuff if any
+            // user has to be ninja to prevent studio being cleaned
+            // but ninjas DO exist so...
+            Asiance.Studio.clean_fb();
+            
             if (typeof Asiance.fbsession !== 'undefined') {
                 // cleanup ui
-                $('#choice').fadeOut('slow');
-                $fbstuff.show();
+                $('#choice').fadeOut('slow', function () {
+                    $fbstuff.show();
+                });
 
                 // fetch from FB
-                FB.api('/me/albums?' + token(), function (data) {
+                FB.api('/me/albums?limit=51&' + token(), function (data) {
                     Asiance.Studio.loading(false);
                     Asiance.albums = data.data;
                     $fbstuff.find('h2').text('Your Albums');
