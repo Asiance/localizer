@@ -32,6 +32,7 @@ $(function () {
       , $ploader = $photo.find('.ajax-loader')
       , $bigloader = $('#bigloader')
       , $caption = $('#photo .caption')
+      , caption_loaded = false
       , $image = $('#photo .image');
 
     Asiance.Bigloader = {
@@ -235,9 +236,34 @@ $(function () {
 
     Asiance.Caption = {
         update: function () {
+            // $caption.css('top', '0px');
+            // $caption.css('left', '0px');
+            
             var data = $.param(Asiance.caption);
 
-            $caption[0].src = Asiance.path + '/caption?' + data;
+            $caption
+              .load(function () {
+                  var $this = $(this);
+
+                  // slide element to the white area, bottom of the pic
+                  // trying to center it horizontally and vertically too
+                  var white_area_height = 80
+                    , margin = Math.max((white_area_height - $this.height())/2, 0)
+                    , newtop = $photo.height() - $this.height() - margin
+                    , newleft = ($photo.width() - $this.width()) / 2;
+
+                  $this.animate({
+                      top: newtop + 'px',
+                      left: newleft + 'px'
+                  }, {
+                      duration: caption_loaded ? 0 : 800,
+                      queue: false
+                  });
+
+                  if (!caption_loaded) caption_loaded = true;
+              })
+              .attr('src', Asiance.path + '/caption?' + data);
+
             $caption.show();
         }
     };
