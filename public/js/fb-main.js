@@ -203,7 +203,7 @@ $(function () {
             FB.ui({
                 method: 'feed',
                 name: 'Asiance Localizer',
-                link: 'https://www.facebook.com/Asiance?sk=app_141297295948882',
+                link: 'https://www.facebook.com/photo.php?fbid=' + split[1] + '&theater',
                 source: split[0],
                 caption: 'Generate pictures and share them with your friends!',
                 properties: {
