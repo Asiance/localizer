@@ -124,6 +124,12 @@ $(function () {
     };
 
     $('#share').bind('click', function (e) {
+        if (!Asiance.Caption.loaded) {
+            Asiance.Bigloader.show();
+            Asiance.Bigloader.error();
+            return;
+        }
+
         if (Asiance.fbsession = FB.getSession()) {
             share_and_save();
         } else {

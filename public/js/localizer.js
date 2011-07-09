@@ -4,9 +4,7 @@ $(function () {
         path: window.location.protocol + '//' + window.location.host,
         caption: {
             c1: '#e62b47',
-            c2: '#34414d',
-            lang: 'ko',
-            caption: '1'
+            c2: '#34414d'
         }
     };
 
@@ -32,7 +30,6 @@ $(function () {
       , $ploader = $photo.find('.ajax-loader')
       , $bigloader = $('#bigloader')
       , $caption = $('#photo .caption')
-      , caption_loaded = false
       , $image = $('#photo .image');
 
     Asiance.Bigloader = {
@@ -235,9 +232,9 @@ $(function () {
 */
 
     Asiance.Caption = {
+        loaded: false,
         update: function () {
-            // $caption.css('top', '0px');
-            // $caption.css('left', '0px');
+            var self = this;
             
             var data = $.param(Asiance.caption);
 
@@ -258,15 +255,20 @@ $(function () {
                       top: newtop + 'px',
                       left: newleft + 'px'
                   }, {
-                      duration: caption_loaded ? 0 : 800,
+                      duration: self.loaded ? 0 : 800,
                       queue: false
                   });
 
-                  if (!caption_loaded) caption_loaded = true;
+                  // caption is visible.
+                  if (!self.loaded) self.loaded = true;
+
+                  // setting x and y to new coordinates
+                  Asiance.caption.x = Math.round(newleft);
+                  Asiance.caption.y = Math.round(newtop);
               })
               .attr('src', Asiance.path + '/caption?' + data);
 
-            $caption.show();
+              $caption.show();
         }
     };
 
