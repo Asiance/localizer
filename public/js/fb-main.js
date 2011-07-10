@@ -95,10 +95,8 @@ $(function () {
                 Asiance.Studio.loading(false);
                 $fbstuff.find('h2').text('Your Photos');
 
-                a.photos = data.data;
-
                 // DUMP ALL THE THINGZ
-                _(a.photos).forEach(function (p) {
+                _(data.data).forEach(function (p) {
                     Photo.render(p);
                 });
             });
@@ -121,10 +119,9 @@ $(function () {
                 // fetch from FB
                 FB.api('/me/albums?limit=51&' + token(), function (data) {
                     Asiance.Studio.loading(false);
-                    Asiance.albums = data.data;
                     $fbstuff.find('h2').text('Your Albums');
 
-                    _(Asiance.albums).forEach(function (a) {
+                    _(data.data).forEach(function (a) {
                         Album.render(a);
                     });
                 });
@@ -202,14 +199,14 @@ $(function () {
             },
             success: function (lynx) {
                 Asiance.Bigloader.done(function () {
-                    Asiance.FB.sharedialog(lynx);
+                    ui.share(lynx);
                 });
             }
         });
     }
 
-    Asiance.FB = {
-        sharedialog: function (lynx) {
+    var ui = {
+        share: function (lynx) {
             // lynx: "imagesource#linktoimage"
             var split = lynx.split('#');
 
@@ -252,4 +249,10 @@ $(function () {
             console.log('token errorz.');
         }
     }
+
+    Asiance.FB = {
+        Photo: Photo,
+        Album: Album,
+        ui: ui
+    };
 });

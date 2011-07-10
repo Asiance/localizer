@@ -32,7 +32,7 @@ $(function () {
       , $caption = $('#photo .caption')
       , $image = $('#photo .image');
 
-    Asiance.Bigloader = {
+    var Bigloader = {
         text: function (txt) {
             $bigloader.find('h2').text(txt);
         },
@@ -74,7 +74,7 @@ $(function () {
     // click outside a box hides the current ui elements
     $('html').bind('click', function (event) {
         $studio.fadeOut(function () {
-            Asiance.Studio.workspace2choice();
+            Studio.workspace2choice();
         });
 
         $messages.fadeOut();
@@ -111,7 +111,7 @@ $(function () {
         $this = $(this);
         $messages.fadeOut();
         Asiance.caption.caption = $this.data('id');
-        Asiance.Caption.update();
+        Caption.update();
     });
 
     $finput.live('change', function () {
@@ -120,32 +120,32 @@ $(function () {
     });
 
     $workspace.delegate('.cropbutton', 'click', function () {
-        Asiance.Studio.crop();
+        Studio.crop();
     });
 
     var jcrop;
     function ajaxizeForm () {
         $imgform.ajaxForm({
             beforeSubmit: function (data) {
-                Asiance.Studio.choice2workspace();
+                Studio.choice2workspace();
             },
             success: function (data) {
                 // check if nginx sent 'request too large'
-                if (/413/.test(data)) {
+                if (/^413/.test(data)) {
                     $studio.fadeOut();
-                    Asiance.Studio.workspace2choice();
+                    Studio.workspace2choice();
                     alert('This file is too big! (4MB max)');
                     return;
                 }
 
                 // data is url
-                Asiance.Studio.init_workspace(data);
+                Studio.init_workspace(data);
             }
         });
     }
     ajaxizeForm();
 
-    Asiance.Studio = {
+    var Studio = {
         choice2workspace: function () {
             $choice.hide();
 
@@ -235,7 +235,7 @@ $(function () {
           |_|                      
 */
 
-    Asiance.Caption = {
+    var Caption = {
         loaded: false,
         update: function () {
             var self = this;
@@ -293,4 +293,8 @@ $(function () {
     }).bind('mouseup', function (event) {
         $(this).css('cursor', 'pointer');
     });
+
+    Asiance.Bigloader = Bigloader;
+    Asiance.Studio = Studio;
+    Asiance.Caption = Caption;
 });
