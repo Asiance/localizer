@@ -161,7 +161,6 @@ $(function () {
                 Studio.choice2workspace();
             },
             success: function (data) {
-                ajaxizeForm();
                 // check if nginx sent 'request too large'
                 if (/^413/.test(data)) {
                     $studio.fadeOut();
@@ -234,6 +233,7 @@ $(function () {
                     aspectRatio: 1
                 });
                 jcrop.setSelect([0, 0, 301, 301]);
+                ajaxizeForm();
             })
             .attr('src', url)
             .show();
