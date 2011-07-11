@@ -158,6 +158,7 @@ $(function () {
 
     var jcrop;
     function ajaxizeForm () {
+        submitted = false;
         $imgform.ajaxForm({
             beforeSubmit: function (data) {
                 Studio.choice2workspace();
