@@ -143,12 +143,14 @@ $(function () {
         Caption.update();
     });
 
-    // thanks to ie file input change event bug.
-        $finput.change(function (event) {
-            // async form submit
-            $imgform.submit();
-        });
+    var submitted = false;
+    $finput.change(function (event) {
+        // ie8 hack
+        if (submitted) return;
+        submitted = true;
 
+        $imgform.submit();
+    });
 
     $workspace.delegate('.cropbutton', 'click', function () {
         Studio.crop();
