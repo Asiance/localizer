@@ -186,6 +186,11 @@ class Localizer < Sinatra::Application
       return 'Specify x and y'
     end
 
+    if not session[:image_path] or session[:image_path].empty?
+      status 500
+      return 'Select an image'
+    end
+
     path = session[:image_path]
 
     # merging 2 images, background and caption
