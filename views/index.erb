@@ -114,10 +114,6 @@
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
 
-    <% if ENV['RAILS_ENV'] == 'prod' %>
-      <script type="text/javascript" src="<%= url('/js/lclz.min.js') %>"></script>
-
-    <% else %>
       <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -131,6 +127,10 @@
          })();
 
        </script>
+    <% if ENV['RAILS_ENV'] == 'prod' %>
+      <script type="text/javascript" src="<%= url('/js/lclz.min.js') %>"></script>
+
+    <% else %>
       <script type="text/javascript" src="<%= url('/js/jquery-1.6.1.min.js') %>"></script>
       <script type="text/javascript" src="<%= url('/js/underscore-min.js') %>"></script>
       <script type="text/javascript" src="<%= url('/js/jquery-ui-1.8.14.custom.min.js') %>"></script>
