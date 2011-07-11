@@ -237,11 +237,11 @@ $(function () {
             // https://www.facebook.com/photo.php?fbid=' + split[1]
             FB.ui({
                 method: 'feed',
-                name: 'Asiance Localizer',
+                name: 'View larger image',
                 link: 'https://www.facebook.com/photo.php?fbid=' + Asiance.share.pid + '&theater',
                 source: Asiance.share.result_url,
                 to: Asiance.share.to,
-                caption: 'Generate pictures and share them with your friends!',
+                caption: 'Generate pictures in Korean, Japanase, Chinese, French or English and share them with your friends!',
                 properties: {
                     'Photo': {
                         text: 'Zoom',
