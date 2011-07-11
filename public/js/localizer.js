@@ -143,10 +143,12 @@ $(function () {
         Caption.update();
     });
 
-    $finput.live('change', function () {
-        // async form submit
-        $imgform.submit();
-    });
+    // thanks to ie file input change event bug.
+        $finput.change(function (event) {
+            // async form submit
+            $imgform.submit();
+        });
+
 
     $workspace.delegate('.cropbutton', 'click', function () {
         Studio.crop();
@@ -159,6 +161,7 @@ $(function () {
                 Studio.choice2workspace();
             },
             success: function (data) {
+                ajaxizeForm();
                 // check if nginx sent 'request too large'
                 if (/^413/.test(data)) {
                     $studio.fadeOut();
@@ -200,7 +203,6 @@ $(function () {
             $workspace.hide();
             $choice.show();
 
-            ajaxizeForm();
         },
 
         choice2fb: function () {
@@ -224,7 +226,6 @@ $(function () {
 
             var $cropme = $studio.find('.cropme');
             $cropme
-            .attr('src', url)
             .load(function () {
                 jcrop = $.Jcrop('#studio .cropme', {
                     onChange: function (pos) {
@@ -234,6 +235,7 @@ $(function () {
                 });
                 jcrop.setSelect([0, 0, 301, 301]);
             })
+            .attr('src', url)
             .show();
         },
 
