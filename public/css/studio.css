@@ -46,6 +46,8 @@
 
 #studio .jcrop-holder {
   background-color: black;
+  border: 2px solid #777;
+  margin: 0 auto;
 }
 
 #workspace {
@@ -60,7 +62,7 @@
     padding: 10px 30px;
     position: relative;
     text-align: center;
-    z-index: 1000;
+    z-index: 900;
 }
 
 #choice .fb-button {
@@ -95,12 +97,13 @@
 #fbstuff {
     display: none;
     margin: 0;
-    padding-left: 4%;
+    padding-left: 5%;
+    padding-right: 5%;
     text-align: center;
-    width: 96%;
+    width: 90%;
 }
 
-#fbstuff li {
+#fbstuff .fbitem {
     color: #333;
     cursor: pointer;
     /* TODO display for ie7 */
@@ -108,25 +111,25 @@
     float: left;
     height: 170px;
     list-style: none;
-    margin-right: 1px;
-    padding: 5px;
+    margin-right: 12px;
+    position: relative;
     vertical-align: middle;
     width: 130px;
 }
 
-#fbstuff li.fbphoto {
+#fbstuff li.last {
+  margin-right: 0;
+}
+
+#fbstuff .fbphoto {
     height: 140px;
 }
 
-#fbstuff img {
+#fbstuff .fbitem img {
     border: 1px solid #BBB;
 }
 
-#fbstuff li:hover img {
+#fbstuff .fbitem:hover img {
     border-color: #666;
 }
 
-#studio .jcrop-holder {
-    border: 2px solid #777;
-    margin: 0 auto;
-}

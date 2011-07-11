@@ -5,16 +5,19 @@ $(function () {
         caption: {
             c1: '#e62b47',
             c2: '#34414d'
-        }
+        },
+        share: {}
     };
 
-    FB.Canvas.setSize({ height: 770, width: 510});
-    FB.init({
-        appId  : '141297295948882',
-        status : true, // check login status
-        cookie : true, // enable cookies to allow the server to access the session
-        xfbml  : true  // parse XFBML
-    });
+    if (typeof FB !== 'undefined') {
+        FB.Canvas.setSize({ height: 770, width: 510});
+        FB.init({
+            appId  : '141297295948882',
+            status : true, // check login status
+            cookie : true, // enable cookies to allow the server to access the session
+            xfbml  : true  // parse XFBML
+        });
+    }
 
     var $studio = $('#studio');
 
@@ -33,38 +36,58 @@ $(function () {
       , $image = $('#photo .image');
 
     var Bigloader = {
+        friendsearch: $bigloader.find('p'),
+        buttons: $bigloader.find('.buttons'),
+        postbutton: $bigloader.find('.post'),
+        // isdone: false,
+        reset: function () {
+            this.text('Localizing...');
+            this.pic('ajax-bigloader.gif');
+            this.friendsearch.show();
+            this.postbutton.removeClass('done');
+            // this.buttons.hide();
+            // this.isdone = false;
+        },
         text: function (txt) {
             $bigloader.find('h2').text(txt);
+        },
+        pic: function (newimg) {
+            $bigloader.children('img').attr('src', Asiance.path + '/images/' + newimg);
         },
         show: function () {
             $bigloader.show();
         },
         hide: function () {
             $bigloader.hide();
-            $bigloader.find('h2')
-              .text('Localizing...');
+            this.reset();
         },
         fadeOut: function () {
+            var self = this;
             $bigloader.fadeOut(function () {
-                $bigloader.find('h2')
-                  .text('Localizing...');
+                Bigloader.reset();
             });
         },
         done: function (callback) {
             var self = this;
 
             self.text('The photo has been uploaded to your album!');
+            self.pic('check.png');
+            self.friendsearch.show();
 
-            setTimeout(function () {
-                self.fadeOut();
-                callback();
-            }, 2000);
+            // self.isdone = true;
+            self.buttons.addClass('done');
+            if (typeof Asiance.share.to !== 'undefined') {
+                self.postbutton.show();
+            }
         },
         error: function () {
             var self = this;
 
+            self.friendsearch.hide();
             $bigloader.find('h2')
               .html('Something went wrong...<br />Did you select an image and a caption?');
+
+            self.pic('redcross.png');
 
             setTimeout(self.fadeOut, 2800);
         }
@@ -82,11 +105,17 @@ $(function () {
 
     // click inside should not close
     $studio.bind('click', function (event) {
+        if($(event.target).hasClass('cancel'))
+            return;
+
         event.stopPropagation();
     });
 
     // click inside should not close
     $messages.bind('click', function (event) {
+        if($(event.target).hasClass('cancel'))
+            return;
+
         event.stopPropagation();
     });
 
@@ -174,12 +203,18 @@ $(function () {
             ajaxizeForm();
         },
 
+        choice2fb: function () {
+            $choice.fadeOut('slow', function () {
+                $('#fbstuff').show();
+            });
+        },
+
         clean_fb: function () {
             $studio.find('#fbstuff').hide();
             // erasing fb albums / photos
             // FIXME don't remove, keep in cache?
             // what if user uploads a new photo in the meantime?
-            $studio.find('.fbphoto, .fbalbum').remove();
+            $studio.find('.fbphoto, .fbalbum, .fbfriend, #friendsearch').remove();
         },
 
         init_workspace: function (url) {
@@ -209,7 +244,7 @@ $(function () {
             $studio.fadeOut();
             self.workspace2choice();
 
-            var url  = Asiance.path + '/cropped?' + $.param(Asiance.crop);
+            var url = Asiance.path + '/cropped?' + $.param(Asiance.crop);
 
             // prefetch, hide loader on load event
             $('<img />')

@@ -1,3 +1,7 @@
+body {
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+}
+
 .clear {
   clear: both;
   /* height: 0; */
@@ -11,6 +15,21 @@
   margin: 0 auto;
   position: relative;
   width: 510px;
+}
+
+div.cancel {
+    background: url("../images/cross.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 12px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 12px;
+    z-index: 1002;
+}
+
+div.cancel:hover {
+    background-position: 0px -12px;
 }
 
 .fb-button {
@@ -83,7 +102,7 @@
 .box {
     left: 12px;
     padding: 0 10px;
-    width: 455px;
+    width: 461px;
 }
 
 .box .inside {
@@ -240,7 +259,6 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
     height: 590px;
     position: absolute;
     top: 77px;
-    width: 479px;
     z-index: 100;
 }
 
@@ -252,6 +270,7 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
 #messages ul {
     margin-bottom: 0px;
     margin-top: 0px;
+    padding-top: 10px;
 }
 
 #messages li {
@@ -295,20 +314,107 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
     border-radius: 30px 30px 30px 30px;
     cursor: auto;
     display: none;
-    height: 160px;
     left: 32px;
     opacity: 1;
     position: absolute;
     text-align: center;
     top: 192px;
     width: 434px;
+    z-index: 1000;
 }
 
-#bigloader img {
+#bigloader > img {
     position: relative;
     margin-top: 23px;
 }
 
-#bigloader h2 {
+#bigloader > h2 {
     position: relative;
+}
+
+#friendsearch {
+border: 1px solid #ddd;
+font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+font-size: 15px;
+padding: 3px 7px;
+position: relative;
+width: 240px;
+}
+
+.ui-autocomplete {
+  background: white;
+  border: solid 1px #AAA;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+  width: 255px;
+  z-index: 1001;
+}
+
+.ui-autocomplete li {
+  cursor: pointer;
+  list-style: none;
+}
+
+.ui-autocomplete li a {
+  color: #333;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+  display: block;
+  font-size: 15px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.ui-autocomplete a:hover, .ui-autocomplete .ui-state-hover {
+  color: #000;
+  background-color: #D1E9FC;
+  border-color: #555;
+}
+
+.ui-autocomplete li img {
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+
+#bigloader .buttons {
+    display: none;
+    margin: 15px 0px;
+}
+
+#bigloader .buttons.done {
+    display: block;
+}
+
+#bigloader .fb-button {
+    display: inline-block;
+    font-size: 14px;
+    height: 18px;
+    line-height: 18px;
+    position: relative;
+}
+
+/* 'Post' button */
+#bigloader .post {
+    display: inline-block;
+}
+
+/* 'On my wall' button */
+#bigloader .fb-button.mywall {
+    margin-right: 150px;
+}
+
+/* 'Cancel' button */
+#bigloader .fb-button.cancel {
+    background: #F2F2F2;
+    border-color: #333;
+    color: #333;
+}
+
+#bigloader .done .cancel, #bigloader .done .mywall {
+    display: inline-block;
 }

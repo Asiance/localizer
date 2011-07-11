@@ -3,15 +3,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <% if ENV['RAILS_ENV'] == 'prod' %>
-    <link type="text/css" rel="stylesheet" href="<%= url('/css/lclz.min.css') %>" />
+      <link type="text/css" rel="stylesheet" href="<%= url('/css/lclz.min.css') %>" />
 
     <% else %>
-    <link type="text/css" rel="stylesheet" href="<%= url('/css/jquery.Jcrop.css') %>" />
-    <link type="text/css" rel="stylesheet" href="<%= url('/css/global.css') %>" />
-    <link type="text/css" rel="stylesheet" href="<%= url('/css/main.css') %>" />
-    <link type="text/css" rel="stylesheet" href="<%= url('/css/studio.css') %>" />
-  <% end %>
-    
+      <link type="text/css" rel="stylesheet" href="<%= url('/css/jquery.Jcrop.css') %>" />
+      <link type="text/css" rel="stylesheet" href="<%= url('/css/global.css') %>" />
+      <link type="text/css" rel="stylesheet" href="<%= url('/css/main.css') %>" />
+      <link type="text/css" rel="stylesheet" href="<%= url('/css/studio.css') %>" />
+    <% end %>
+
     <meta charset="UTF-8">
     <title>Localizer</title>
   </head>
@@ -46,7 +46,9 @@
       </div>
 
       <div id="messages" class="box">
-        <div class="top"></div>
+        <div class="top">
+          <div class="cancel" rel="messages"></div>
+        </div>
 
         <div class="inside">
           <ul>
@@ -64,57 +66,67 @@
 
       <div id="studio" class="box">
         <img class="ajax-loader" src="<%= url('images/ajax-loader.gif') %>" />
-        <div class="top"></div>
+        <div class="top">
+          <div class="cancel" rel="studio"></div>
+        </div>
         <div class="inside">
-        <div id="choice">
-          <p class="instruction">Upload From Facebook</p>
-          <span id="fbconnect" class="fb-button">Connect with Facebook!</span>
+          <div id="choice">
+            <p class="instruction">Upload From Facebook</p>
+            <span id="fbconnect" class="fb-button">Connect with Facebook!</span>
 
-          <hr />
-          <p class="instruction">Upload From Your Computer</p>
+            <hr />
+            <p class="instruction">Upload From Your Computer</p>
 
-          <form id="imgform" action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" id="finput" name="image" />
-          </form>
+            <form id="imgform" action="/upload" method="post" enctype="multipart/form-data">
+              <input type="file" id="finput" name="image" />
+            </form>
+            <div class="clear"></div>
+          </div>
+
+          <div id="workspace">
+            <img class="cropme" src="" alt="" />
+            <div class="cropbutton"></div>
+          </div>
+
+          <ul id="fbstuff">
+            <h2></h2>
+          </ul>
+
           <div class="clear"></div>
         </div>
-
-        <div id="workspace">
-          <img class="cropme" src="" alt="" />
-          <div class="cropbutton"></div>
-        </div>
-
-        <ul id="fbstuff">
-          <h2></h2>
-        </ul>
-
-        <div class="clear"></div>
-</div>
         <div class="bottom"></div>
       </div>
 
       <div id="bigloader">
         <img src="<%= url('images/ajax-bigloader.gif') %>" />
         <h2>Localizing...</h2>
+        <p>
+          Post to <input type="text" id="friendsearch" />&nbsp;'s wall!
+        </p>
+        <div class="buttons">
+          <a class="fb-button mywall">My wall</a>
+          <a class="fb-button post">Post</a>
+          <a class="fb-button cancel" rel="bigloader">Cancel</a>
+        </div>
       </div>
       <div id="share"></div>
     </div>
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
-      
+
     <% if ENV['RAILS_ENV'] == 'prod' %>
-    <script type="text/javascript" src="<%= url('/js/lclz.min.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/lclz.min.js') %>"></script>
 
     <% else %>
-    <script type="text/javascript" src="<%= url('/js/jquery-1.6.1.min.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/underscore-min.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/jquery-ui-1.8.14.custom.min.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/jquery.form.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/jquery.Jcrop.min.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/jscolor.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/localizer.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/fb-main.js') %>"></script>
-    <script type="text/javascript" src="<%= url('/js/color.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/jquery-1.6.1.min.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/underscore-min.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/jquery-ui-1.8.14.custom.min.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/jquery.form.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/jquery.Jcrop.min.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/jscolor.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/localizer.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/fb-main.js') %>"></script>
+      <script type="text/javascript" src="<%= url('/js/color.js') %>"></script>
     <% end %>
   </body>
 </html>
