@@ -263,29 +263,36 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
 }
 
 #messages img {
-  float: left;
-  margin-top: 2px;
+    float: left;
+    height: 20px;
+    margin-top: 2px;
 }
 
 #messages ul {
-    margin-bottom: 0px;
-    margin-top: 0px;
-    padding-top: 10px;
+	margin-bottom: 0;
+	margin-left: 15px;
+	margin-top: 0;
+	overflow: hidden;
+	padding-top: 10px;
 }
 
 #messages li {
-  list-style: none
+    float: left;
+    list-style: none outside none;
+    overflow: hidden;
+    width: 50%;
 }
 
 #messages .message {
-  border: 1px dashed #BBBBBB;
-  cursor: pointer;
-  font-size: 20px;
-  height: 40px;
-  line-height: 40px;
-  margin-left: 60px;
-  padding: 0 13px;
-  width: 320px;
+    border: 1px dashed #BBBBBB;
+    cursor: pointer;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    margin-left: 30px;
+    padding: 0 13px;
+    width: 150px;
 }
 
 #messages .message:hover {
