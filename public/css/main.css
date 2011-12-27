@@ -126,6 +126,7 @@ div.cancel:hover {
 }
 
 #outline {
+	visibility: hidden;
     border: 2px dashed #FF5555;
     display: block;
     height: 301px;
