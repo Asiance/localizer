@@ -10,7 +10,7 @@ $(function () {
     };
 
     if (typeof FB !== 'undefined') {
-        FB.Canvas.setSize({ height: 770, width: 510});
+        FB.Canvas.setSize({ height: 1030, width: 510});
         FB.init({
             appId  : '141297295948882',
             status : true, // check login status
