@@ -11,7 +11,7 @@ body {
 
 #localizer {
   background: url('../images/main_bg.jpg') no-repeat;
-  height: 770px;
+  height: 1030px;
   margin: 0 auto;
   position: relative;
   width: 510px;
@@ -54,16 +54,16 @@ div.cancel:hover {
   background: url("../images/pickphoto.png") no-repeat scroll 0 0 transparent;
   cursor: pointer;
   display: block;
-  height: 42px;
+  height: 50px;
   left: 134px;
   position: absolute;
-  top: 518px;
+  top: 658px;
   width: 218px;
   z-index: 100;
 }
 
 #pickyourphoto:hover {
-    background-position: 0 -42px;
+    background-position: 0 -50px;
 }
 
 .icon {
@@ -129,9 +129,9 @@ div.cancel:hover {
     border: 2px dashed #FF5555;
     display: block;
     height: 301px;
-    left: 100px;
+    left: 62px;
     position: absolute;
-    top: 118px;
+    top: 250px;
     width: 301px;    
 }
 
@@ -139,10 +139,10 @@ div.cancel:hover {
     background-repeat: no-repeat;
   display: block;
   height: 375px;
-  left: 102px;
+  left: 64px;
   overflow: hidden;
   position: absolute;
-  top: 120px;
+  top: 252px;
   width: 301px;
 }
 
@@ -168,9 +168,9 @@ div.cancel:hover {
 
 #fields {
     height: 180px;
-    left: 79px;
+    left: 47px;
     position: absolute;
-    top: 542px;
+    top: 720px;
     width: 316px;
 }
 
@@ -192,9 +192,9 @@ ___ ___ | | ___  _ __ _ __ (_) ___| | _____ _ __ ___
  */
 
 #colors {
-    left: 170px;
+    left: 138px;
     position: absolute;
-    top: 110px;
+    top: 129px;
 }
 
 #colorbtn1, #colorbtn2 {
@@ -305,7 +305,7 @@ _ __ ___   ___  ___ ___  __ _  __ _  ___  ___
   height: 66px;
   left: 122px;
   position: absolute;
-  top: 700px;
+  top: 947px;
   width: 255px;
 }
 
