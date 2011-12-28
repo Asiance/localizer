@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 mkdir public/uploads
 mkdir public/captions
 mkdir logs
