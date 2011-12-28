@@ -77,6 +77,7 @@ $(function () {
         render: function (f) {
             var url = 
                 'https://graph.facebook.com/'+ f.id +'/picture?type=small&'+ token();
+            url = url.replace('accessToken', 'access_token');
 
             $('<img />').load(function (event) {
                 var name = f.name;
@@ -150,6 +151,7 @@ $(function () {
         render: function (a) {
             var url = 
                 'https://graph.facebook.com/' + a.id + '/picture?type=small&' + token();
+            url = url.replace('accessToken', 'access_token');
             // 2 is small (130x130)
             $('<img />')
             .load(function () {
