@@ -16,7 +16,7 @@ $(function () {
             // but ninjas DO exist so...
             Asiance.Studio.clean_fb();
 
-            if (typeof Asiance.fbsession !== 'undefined') {
+            if (typeof Asiance.authResponse !== 'undefined') {
                 // cleanup ui
                 $('#choice').fadeOut('slow', function () {
                     $fbstuff.show();
@@ -40,7 +40,7 @@ $(function () {
 
                     Asiance.friends.push({
                         label: 'Me',
-                        id: Asiance.fbsession.uid
+                        id: Asiance.authResponse.userId
                     });
 
                     self.searchinput();
@@ -75,8 +75,6 @@ $(function () {
             };
         },
         render: function (f) {
-            var self = this;
-
             var url = 
                 'https://graph.facebook.com/'+ f.id +'/picture?type=small&'+ token();
 
@@ -105,7 +103,7 @@ $(function () {
         pick: function (p) {
             var params = {
                 pid: p.id,
-                access_token: Asiance.fbsession.access_token
+                accessToken: Asiance.authResponse.accessToken
             };
 
             Asiance.Studio.choice2workspace();
@@ -202,14 +200,13 @@ $(function () {
         },
 
         fetch: function () {
-            var self = this;
 
             // cleaning previous fb stuff if any
             // user has to be ninja to prevent studio being cleaned
             // but ninjas DO exist so...
             Asiance.Studio.clean_fb();
             
-            if (typeof Asiance.fbsession !== 'undefined') {
+            if (typeof Asiance.authResponse !== 'undefined') {
                 // cleanup ui
                 Asiance.Studio.choice2fb();
 
@@ -228,7 +225,7 @@ $(function () {
             }
         }
     };
-
+    
     var UI = {
         share: function () {
             // lynx: "imagesource#linktoimage"
@@ -269,21 +266,21 @@ $(function () {
     };
 
     $fbconnect.bind('click', function (event) {
-        if(Asiance.fbsession = FB.getSession()) {
+        if(typeof Asiance.authResponse !== 'undefined') {
             Asiance.Studio.loading(true);
             Album.fetch();
         } else {
             // not logged in
             FB.login(function (response) {
-                if (response.perms && response.session) {
-                    Asiance.fbsession = response.session;
+            	if (response.authResponse) {
+                    Asiance.authResponse = response.authResponse;
                     // FIXME duplicate above
                     Asiance.Studio.loading(true);
                     Album.fetch();
                 } else {
-                    console.log('fail');
+                	console.log('User cancelled login or did not fully authorize.');
                 }
-            }, { perms: 'publish_stream,user_photos' });
+            }, { scope: 'publish_stream, user_photos' });
         }
     });
 
@@ -304,20 +301,20 @@ $(function () {
             return;
         }
 
-        if (Asiance.fbsession = FB.getSession()) {
+        if (typeof Asiance.authResponse !== 'undefined') {
             share_and_save();
         } else {
             FB.login(function (response) {
                 //user didn't login or didnt authorize
                 // console.log('not logged in');
-                if (response.perms && response.session) {
-                    Asiance.fbsession = response.session;
+            	if (response.authResponse) {
+                    Asiance.authResponse = response.authResponse;
                     share_and_save();
                 } else {
                     // not logged in
                 }
-            }, { perms:'publish_stream,user_photos' });
-        }
+            }, { scope: 'publish_stream,user_photos' });
+        };
     });
 
     $('#bigloader .fb-button').bind('click', function (event) {
@@ -332,9 +329,9 @@ $(function () {
     });
 
     function share_and_save () {
-        // adding access_token to data sent to server
-        Asiance.caption.access_token = Asiance.fbsession.access_token;
-        Asiance.caption.uid = Asiance.fbsession.uid;
+        // adding accessToken to data sent to server
+        Asiance.caption.accessToken = Asiance.authResponse.accessToken;
+        Asiance.caption.uid = Asiance.authResponse.userId;
 
         Friend.fetch();
 
@@ -361,8 +358,8 @@ $(function () {
     }
 
     function token () {
-        if (typeof Asiance.fbsession !== 'undefined') {
-            return $.param({access_token: Asiance.fbsession.access_token});
+        if (typeof Asiance.authResponse !== 'undefined') {
+            return $.param({accessToken: Asiance.authResponse.accessToken});
         } else {
             console.log('token errorz.');
         }

@@ -121,12 +121,12 @@ class Localizer < Sinatra::Application
   end
 
   post '/fbupload' do
-    unless params[:access_token] && params[:pid]
+    unless params[:accessToken] && params[:pid]
       return status 400
     end
 
     # contacting FB
-    graph = Koala::Facebook::GraphAPI.new(params[:access_token])
+    graph = Koala::Facebook::GraphAPI.new(params[:accessToken])
     imgs = graph.get_object(params[:pid])['images']
     
     # very large pics have an extra size
@@ -239,7 +239,7 @@ class Localizer < Sinatra::Application
     image.write(result_path)
 
     # contacting FB
-    graph = Koala::Facebook::GraphAPI.new(params[:access_token])
+    graph = Koala::Facebook::GraphAPI.new(params[:accessToken])
     fbpic = graph.put_picture(result_path)
 
     # TODO delete photo from disk?

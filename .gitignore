@@ -1,3 +1,6 @@
+.settings/
+.buildpath
+.project
 /public/uploads
 /public/captions
 /logs
