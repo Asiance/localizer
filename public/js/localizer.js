@@ -19,6 +19,15 @@ $(function () {
         });
     }
 
+    // Not that clean but christmas patch !
+    $('.inside p.message').each(function () {
+        if (jQuery.inArray($(this).data('id'),  [6, 12, 14, 16]) != -1) {
+            $(this).css('color', '#fff');
+            $(this).css('background', '#BB2D3D');
+            $(this).css('font-weight', 'bold');
+        }
+    });
+
     var $studio = $('#studio');
 
     var $pickyourphoto = $('#pickyourphoto')
