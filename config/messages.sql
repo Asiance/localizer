@@ -67,7 +67,7 @@ INSERT INTO "translations" VALUES('빨리나아~',NULL,'ko',10,64,'SD DanA-M');
 INSERT INTO "translations" VALUES('我 想 你',NULL,'cn',3,71,'KaiTi');
 INSERT INTO "translations" VALUES('你让我发疯','','cn',4,55,'KaiTi');
 INSERT INTO "translations" VALUES('恭喜',NULL,'cn',5,66,'KaiTi');
-INSERT INTO "translations" VALUES('周年快樂！',NULL,'cn',6,66,'KaiTi');
+INSERT INTO "translations" VALUES('新年快乐！',NULL,'cn',6,66,'KaiTi');
 INSERT INTO "translations" VALUES('生日快乐',NULL,'cn',7,66,'KaiTi');
 INSERT INTO "translations" VALUES('祝你旅途愉快',NULL,'cn',8,47,'KaiTi');
 INSERT INTO "translations" VALUES('玩得开心点',NULL,'cn',9,47,'KaiTi');
