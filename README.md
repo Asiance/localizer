@@ -17,3 +17,6 @@ Deploy in prod:
 Add or edit messages:
 - Edit config/messsages.sql
 - sqlite3 -init config/messages.sql localizer.db
+
+You may remove existing captions!
+```rm public/captions/*```
